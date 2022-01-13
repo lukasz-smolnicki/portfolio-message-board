@@ -1,11 +1,11 @@
 import React from 'react'
 
-const Loading = () => {
+const NotFound = () => {
     return (
         <div>
-            <p>Loading</p>
+            <p>NotFound</p>
         </div>
     )
 }
 
-export default Loading
+export default NotFound
