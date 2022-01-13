@@ -8,13 +8,15 @@ import ThreadList from '../pages/thread/ThreadList'
 import UserList from '../pages/user/UserList'
 import NotFound from '../components/NotFound'
 
-const Main = () => {
+const Main = (props) => {
+    const { handleAuth } = props
+
     return (
         <main>
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/post" element={<PostList />} />
-                <Route path="/signin" element={<SignIn />} />
+                <Route path="/signin" element={<SignIn handleAuth={handleAuth} />} />
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/thread" element={<ThreadList />} />
                 <Route path="/user" element={<UserList />} />

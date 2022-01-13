@@ -3,7 +3,9 @@ import Navbar from './layouts/Navbar'
 import Header from './layouts/Header'
 import Main from './layouts/Main'
 import Footer from './layouts/Footer'
+import Error from './components/Error'
 import Loading from './components/Loading'
+import { checkData, setData } from './utils/dataUtils'
 
 class App extends Component {
   constructor(props) {
@@ -15,17 +17,25 @@ class App extends Component {
     }
   }
 
+  handleAuth = (value) => {
+    this.setState({
+      isAuth: value
+    })
+  }
+
   fetchData = () => {
-    const dataStorage = localStorage.getItem('data')
-    if (dataStorage === null) {
+    if (!checkData()) {
       fetch('data/data.json')
         .then(res => res.json())
         .then(
           (result) => {
-            localStorage.setItem('data', JSON.stringify(result))
+            const data = result
+            setData('id', JSON.stringify(data.id))
+            setData('posts', JSON.stringify(data.posts))
+            setData('threads', JSON.stringify(data.threads))
+            setData('users', JSON.stringify(data.users))
             this.setState({
               isLoaded: true,
-              data: result
             })
           },
           (error) => {
@@ -37,8 +47,7 @@ class App extends Component {
         )
     } else {
       this.setState({
-        isLoaded: true,
-        data: JSON.parse(localStorage.getItem('data'))
+        isLoaded: true
       })
     }
   }
@@ -50,15 +59,19 @@ class App extends Component {
   render() {
     const { error, isLoaded } = this.state
     if (error) {
-      return <p>ERROR: Something's going wrong</p>
+      return (
+        <Error />
+      )
     } else if (!isLoaded) {
-      return <p>Loading...</p>
+      return (
+        <Loading />
+      )
     } else {
       return (
         <>
           <Navbar />
           <Header />
-          <Main />
+          <Main handleAuth={this.handleAuth} />
           <Footer />
         </>
       )
