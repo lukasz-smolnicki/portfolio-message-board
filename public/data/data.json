@@ -1,0 +1,30 @@
+{
+    "id": {
+        "userId": 1,
+        "postId": 1,
+        "threadId": 1
+    },
+    "users": [{
+        "id": 1,
+        "name": "Wookie",
+        "email": "wookie@wookie.pl",
+        "password": "hireme",
+        "date": "2021-12-15 10:50"
+    }],
+    "threads": [{
+        "id": 1,
+        "userId": 1,
+        "name": "Thread title id 1",
+        "body": "Thread body id 1",
+        "editDate": "",
+        "date": "2021-12-18 10:50",
+        "isEdited": false
+    }],
+    "posts": [{
+        "id": 1,
+        "userId": 1,
+        "titleId": 1,
+        "body": "Post id 1",
+        "date": "2021-12-18 10:50"
+    }]
+}

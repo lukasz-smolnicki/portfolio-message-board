@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Thread = () => {
+const Error = () => {
     return (
         <>
 
@@ -8,4 +8,4 @@ const Thread = () => {
     )
 }
 
-export default Thread
+export default Error

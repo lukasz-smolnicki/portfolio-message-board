@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Post = () => {
+const Loading = () => {
     return (
         <>
 
@@ -8,4 +8,4 @@ const Post = () => {
     )
 }
 
-export default Post
+export default Loading
