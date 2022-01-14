@@ -1,8 +1,9 @@
 import React from 'react'
 
 const Button = (props) => {
+    const { handleMethod } = props
     return (
-        <button>{props.children}</button>
+        <button onClick={handleMethod}>{props.children}</button>
     )
 }
 

@@ -38,9 +38,6 @@ class SignIn extends React.Component {
         } else if (user.password !== this.state.password) {
             alert('Wrong password')
         } else {
-            this.setState({
-                loggedUserId: user.id
-            })
             setData('loggedUserId', user.id)
             this.props.handleAuth(true)
         }

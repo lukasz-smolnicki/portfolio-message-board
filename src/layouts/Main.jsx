@@ -1,5 +1,6 @@
 import React from 'react'
 import { Routes, Route } from "react-router-dom"
+import About from '../pages/about/About'
 import Home from '../pages/home/Home'
 import PostList from '../pages/post/PostList'
 import SignIn from '../pages/signin/SignIn'
@@ -15,6 +16,7 @@ const Main = (props) => {
         <main>
             <Routes>
                 <Route path="/" element={<Home />} />
+                <Route path="/about" element={<About />} />
                 <Route path="/post" element={<PostList />} />
                 <Route path="/signin" element={<SignIn handleAuth={handleAuth} />} />
                 <Route path="/signup" element={<SignUp handleAuth={handleAuth} />} />

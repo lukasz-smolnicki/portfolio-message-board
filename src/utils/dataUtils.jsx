@@ -1,10 +1,14 @@
-const getData = (data) => {
-    const getData = JSON.parse(localStorage.getItem(data))
+const getData = (value) => {
+    const getData = JSON.parse(localStorage.getItem(value))
     return (getData)
 }
 
-const setData = (name, data) => {
-    localStorage.setItem(name, JSON.stringify(data))
+const setData = (key, value) => {
+    localStorage.setItem(key, JSON.stringify(value))
+}
+
+const removeData = (key) => {
+    localStorage.removeItem(key)
 }
 
 const checkData = () => {
@@ -15,4 +19,4 @@ const checkData = () => {
     }
 }
 
-export { getData, setData, checkData }
+export { getData, setData, removeData, checkData }
