@@ -17,7 +17,7 @@ const Main = (props) => {
                 <Route path="/" element={<Home />} />
                 <Route path="/post" element={<PostList />} />
                 <Route path="/signin" element={<SignIn handleAuth={handleAuth} />} />
-                <Route path="/signup" element={<SignUp />} />
+                <Route path="/signup" element={<SignUp handleAuth={handleAuth} />} />
                 <Route path="/thread" element={<ThreadList />} />
                 <Route path="/user" element={<UserList />} />
                 <Route path="*" element={<NotFound />} />

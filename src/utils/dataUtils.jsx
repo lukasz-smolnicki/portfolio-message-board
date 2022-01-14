@@ -4,11 +4,11 @@ const getData = (data) => {
 }
 
 const setData = (name, data) => {
-    localStorage.setItem(name, data)
+    localStorage.setItem(name, JSON.stringify(data))
 }
 
 const checkData = () => {
-    if ('id' in localStorage && 'posts' in localStorage && 'threads' in localStorage && 'users' in localStorage) {
+    if ('counters' in localStorage && 'posts' in localStorage && 'threads' in localStorage && 'users' in localStorage) {
         return true
     } else {
         return false

@@ -41,7 +41,7 @@ class SignIn extends React.Component {
             this.setState({
                 loggedUserId: user.id
             })
-            setData('loggedUserId', `${user.id}`)
+            setData('loggedUserId', user.id)
             this.props.handleAuth(true)
         }
         this.handleResetForm()
@@ -56,10 +56,10 @@ class SignIn extends React.Component {
                         <input type="text" name="name" value={this.state.name} placeholder='Enter name' onChange={this.handleChange} />
                     </label>
                     <label>
-                        Password
+                        Password:
                         <input type="password" name="password" value={this.state.password} placeholder='Enter password' onChange={this.handleChange} />
                     </label>
-                    <Button />
+                    <Button>SignIn</Button>
                 </form>
             </section>
         )

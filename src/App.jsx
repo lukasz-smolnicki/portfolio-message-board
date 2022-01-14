@@ -30,10 +30,10 @@ class App extends Component {
         .then(
           (result) => {
             const data = result
-            setData('id', JSON.stringify(data.id))
-            setData('posts', JSON.stringify(data.posts))
-            setData('threads', JSON.stringify(data.threads))
-            setData('users', JSON.stringify(data.users))
+            setData('counters', data.counters)
+            setData('posts', data.posts)
+            setData('threads', data.threads)
+            setData('users', data.users)
             this.setState({
               isLoaded: true,
             })
