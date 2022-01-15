@@ -5,7 +5,7 @@ import Main from './layouts/Main'
 import Footer from './layouts/Footer'
 import Error from './components/Error'
 import Loading from './components/Loading'
-import { checkData, setData } from './utils/dataUtils'
+import { checkData, setData, getData } from './utils/dataUtils'
 
 class App extends Component {
   constructor(props) {
@@ -24,11 +24,12 @@ class App extends Component {
   }
 
   fetchData = () => {
-    if (checkData('counters', 'posts', 'threads', 'users')) {
+    checkData('counters', 'posts', 'threads', 'users')
+      ?
       this.setState({
         isLoaded: true
       })
-    } else {
+      :
       fetch('data/data.json')
         .then(res => res.json())
         .then(
@@ -49,11 +50,25 @@ class App extends Component {
             })
           }
         )
-    }
+  }
+
+  userIsAuthSet = () => {
+    const isAuth = getData('isAuth')
+
+    isAuth === true
+      ?
+      this.setState({
+        isAuth: true
+      })
+      :
+      this.setState({
+        isAuth: false
+      })
   }
 
   componentDidMount() {
     this.fetchData()
+    this.userIsAuthSet()
   }
 
   render() {

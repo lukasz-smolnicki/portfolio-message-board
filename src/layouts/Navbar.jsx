@@ -1,7 +1,7 @@
 import React from 'react'
 import Button from '../components/Button'
 import { NavLink } from "react-router-dom"
-import { removeData } from '../utils/dataUtils'
+import { removeData, setData } from '../utils/dataUtils'
 
 const Navbar = (props) => {
     const { isAuth, handleAuth } = props
@@ -23,6 +23,7 @@ const NavbarSignedIn = (props) => {
             <Button handleMethod={() => {
                 handleAuth(false)
                 removeData('loggedUserId')
+                setData('isAuth', false)
             }}>Sign Out</Button>
         </nav>
     )

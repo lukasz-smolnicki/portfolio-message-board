@@ -3,7 +3,6 @@ import { Navigate, Outlet } from 'react-router-dom'
 
 const ProtectedLogin = (props) => {
     const { isAuth } = props
-    console.log(isAuth)
 
     return isAuth ? <Navigate to={`/`} /> : <Outlet />
 }
