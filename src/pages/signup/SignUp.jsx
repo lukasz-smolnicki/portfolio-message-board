@@ -1,5 +1,5 @@
 import React from 'react'
-import Button from '../../components/Button'
+import { ButtonSubmit } from '../../components/Button'
 import { getData, setData } from '../../utils/dataUtils'
 import { getFormatedDate } from '../../utils/utils'
 
@@ -74,7 +74,7 @@ class SignUp extends React.Component {
                         Password:
                         <input type="password" name="password" value={this.state.password} placeholder='Enter password' onChange={this.handleChange} />
                     </label>
-                    <Button>SignUp</Button>
+                    <ButtonSubmit>SignUp</ButtonSubmit>
                 </form>
             </section>
         )

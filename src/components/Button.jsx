@@ -2,9 +2,14 @@ import React from 'react'
 
 const Button = (props) => {
     const { handleMethod } = props
-    return (
-        <button onClick={handleMethod}>{props.children}</button>
-    )
+
+    return <button type='button' onClick={handleMethod}>{props.children}</button>
 }
 
-export default Button
+const ButtonSubmit = (props) => {
+
+    return <button type='submit'>{props.children}</button>
+}
+
+
+export { Button, ButtonSubmit }

@@ -1,18 +1,75 @@
 import React from 'react'
 import ThreadItem from './ThreadItem'
-import { getData } from '../../utils/dataUtils'
+import { getData, setData } from '../../utils/dataUtils'
+import { ButtonSubmit } from '../../components/Button'
+import { getFormatedDate } from '../../utils/utils'
 
 class ThreadList extends React.Component {
-    state = {
-        threads: [],
-        users: [],
+    constructor(props) {
+        super(props)
+        this.state = {
+            threads: [],
+            users: [],
+            threadListAddIsActive: false,
+            name: '',
+            body: ''
+        }
+    }
+
+    componentDidMount() {
+        this.setState({
+            threads: getData('threads'),
+            users: getData('users')
+        })
+    }
+
+    handleChange = (e) => {
+        const name = e.target.name
+        const value = e.target.value
+        this.setState({
+            [name]: value
+        })
+    }
+
+    handleResetForm = () => {
+        this.setState({
+            name: '',
+            body: ''
+        })
+    }
+
+    handleThreadAdd = (e) => {
+        e.preventDefault()
+        const loggedUserId = getData('loggedUserId')
+        const counters = getData('counters')
+        const threads = getData('threads')
+
+        if (this.state.name === '' || this.state.body === '') {
+            alert('Enter title name and post description')
+        } else {
+            ++counters.threadId
+            const newThread = {
+                id: counters.threadId,
+                userId: loggedUserId,
+                name: this.state.name,
+                body: this.state.body,
+                date: getFormatedDate()
+            }
+            threads.push(newThread)
+            this.setState({
+                threadListAddIsActive: false,
+                threads
+            })
+            setData('threads', threads)
+            setData('counters', counters)
+        }
+        this.handleResetForm()
     }
 
     threadItemList = () => {
-        const threads = getData('threads')
+        const threads = this.state.threads
 
-        const threadItemList = threads.map(thread => <ThreadItem key={thread.id} thread={thread} />)
-        return threadItemList
+        return threads.map(thread => <ThreadItem key={thread.id} thread={thread} />)
     }
 
     render() {
@@ -21,7 +78,10 @@ class ThreadList extends React.Component {
         return (
             <section>
                 <ThreadListNav />
-                <ThreadListAdd />
+                <ThreadListAdd
+                    handleChange={this.handleChange}
+                    handleThreadAdd={this.handleThreadAdd}
+                    state={this.state} />
                 {threadItemList}
                 <ThreadListFooter />
             </section>
@@ -37,14 +97,17 @@ const ThreadListNav = () => {
     )
 }
 
-const ThreadListAdd = () => {
+const ThreadListAdd = (props) => {
+    const { handleChange, handleThreadAdd, state } = props
+
     return (
-        <form>
+        <form onSubmit={handleThreadAdd}>
             <label>
                 ThreadListAdd
-                <input type="text" name="name" />
+                <input type="text" name="name" value={state.name} placeholder='Enter post title' onChange={handleChange} />
+                <input type="text" name="body" value={state.body} placeholder='Enter post body' onChange={handleChange} />
             </label>
-            <input type="submit" value="Wyślij" />
+            <ButtonSubmit>Add Thread</ButtonSubmit>
         </form>
     )
 }

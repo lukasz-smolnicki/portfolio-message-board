@@ -8,10 +8,18 @@ import Loading from './components/Loading'
 import { checkData, setData, getData } from './utils/dataUtils'
 
 class App extends Component {
-  state = {
-    error: null,
-    isLoaded: false,
-    isAuth: false,
+  constructor(props) {
+    super(props)
+    this.state = {
+      error: null,
+      isLoaded: false,
+      isAuth: false,
+    }
+  }
+
+  componentDidMount() {
+    this.fetchData()
+    this.userIsAuthSet()
   }
 
   handleAuth = (value) => {
@@ -61,11 +69,6 @@ class App extends Component {
       this.setState({
         isAuth: false
       })
-  }
-
-  componentDidMount() {
-    this.fetchData()
-    this.userIsAuthSet()
   }
 
   render() {

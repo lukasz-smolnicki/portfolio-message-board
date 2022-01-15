@@ -1,5 +1,5 @@
 import React from 'react'
-import Button from '../components/Button'
+import { Button } from '../components/Button'
 import { NavLink } from "react-router-dom"
 import { removeData, setData } from '../utils/dataUtils'
 

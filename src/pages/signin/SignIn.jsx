@@ -1,5 +1,5 @@
 import React from 'react'
-import Button from '../../components/Button'
+import { ButtonSubmit } from '../../components/Button'
 import { getData, setData } from '../../utils/dataUtils'
 
 class SignIn extends React.Component {
@@ -57,7 +57,7 @@ class SignIn extends React.Component {
                         Password:
                         <input type="password" name="password" value={this.state.password} placeholder='Enter password' onChange={this.handleChange} />
                     </label>
-                    <Button>SignIn</Button>
+                    <ButtonSubmit>SignIn</ButtonSubmit>
                 </form>
             </section>
         )
