@@ -3,22 +3,23 @@ import React from 'react'
 const Header = (props) => {
     const { isAuth } = props
 
+    return isAuth ? <HeaderLoggedIn /> : <HeaderLoggedOut />
+}
+
+const HeaderLoggedIn = () => {
     return (
         <header>
-            {isAuth ? <HeaderLoggetIn /> : <HeaderLoggetOut />}
+            <p>HeaderLoggedIn</p>
         </header>
+
     )
 }
 
-const HeaderLoggetIn = () => {
+const HeaderLoggedOut = () => {
     return (
-        <p>HeaderLoggedIn</p>
-    )
-}
-
-const HeaderLoggetOut = () => {
-    return (
-        <p>HeaderLoggedOut</p>
+        <header>
+            <p>HeaderLoggedOut</p>
+        </header>
     )
 }
 

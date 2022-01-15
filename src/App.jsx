@@ -71,7 +71,7 @@ class App extends Component {
         <>
           <Navbar isAuth={this.state.isAuth} handleAuth={this.handleAuth} />
           <Header isAuth={this.state.isAuth} />
-          <Main handleAuth={this.handleAuth} />
+          <Main isAuth={this.state.isAuth} handleAuth={this.handleAuth} />
           <Footer />
         </>
       )

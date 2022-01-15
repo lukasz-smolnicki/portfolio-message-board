@@ -5,11 +5,8 @@ import { removeData } from '../utils/dataUtils'
 
 const Navbar = (props) => {
     const { isAuth, handleAuth } = props
-    return (
-        <>
-            {isAuth ? <NavbarSignedIn handleAuth={handleAuth} /> : <NavbarSignedOut />}
-        </>
-    )
+
+    return isAuth ? <NavbarSignedIn handleAuth={handleAuth} /> : <NavbarSignedOut />
 }
 
 const NavbarSignedIn = (props) => {

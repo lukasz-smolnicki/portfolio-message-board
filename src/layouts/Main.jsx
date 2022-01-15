@@ -8,9 +8,10 @@ import SignUp from '../pages/signup/SignUp'
 import ThreadList from '../pages/thread/ThreadList'
 import UserList from '../pages/user/UserList'
 import NotFound from '../components/NotFound'
+import { ProtectedLogin } from '../utils/protectedRouts'
 
 const Main = (props) => {
-    const { handleAuth } = props
+    const { isAuth, handleAuth } = props
 
     return (
         <main>
@@ -18,8 +19,10 @@ const Main = (props) => {
                 <Route path="/" element={<Home />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/post" element={<PostList />} />
-                <Route path="/signin" element={<SignIn handleAuth={handleAuth} />} />
-                <Route path="/signup" element={<SignUp handleAuth={handleAuth} />} />
+                <Route element={<ProtectedLogin isAuth={isAuth} />} >
+                    <Route path="/signin" element={<SignIn handleAuth={handleAuth} />} />
+                    <Route path="/signup" element={<SignUp handleAuth={handleAuth} />} />
+                </Route>
                 <Route path="/thread" element={<ThreadList />} />
                 <Route path="/user" element={<UserList />} />
                 <Route path="*" element={<NotFound />} />
