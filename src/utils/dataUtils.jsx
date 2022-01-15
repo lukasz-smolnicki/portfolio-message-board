@@ -11,12 +11,11 @@ const removeData = (key) => {
     localStorage.removeItem(key)
 }
 
-const checkData = () => {
-    if ('counters' in localStorage && 'posts' in localStorage && 'threads' in localStorage && 'users' in localStorage) {
-        return true
-    } else {
-        return false
-    }
+const checkData = (...args) => {
+    const arr = args.map(arg => (arg in localStorage))
+    const dataIsLoaded = arr.every(x => x)
+
+    return dataIsLoaded
 }
 
 export { getData, setData, removeData, checkData }

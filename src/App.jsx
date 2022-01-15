@@ -24,7 +24,11 @@ class App extends Component {
   }
 
   fetchData = () => {
-    if (!checkData()) {
+    if (checkData('counters', 'posts', 'threads', 'users')) {
+      this.setState({
+        isLoaded: true
+      })
+    } else {
       fetch('data/data.json')
         .then(res => res.json())
         .then(
@@ -45,10 +49,6 @@ class App extends Component {
             })
           }
         )
-    } else {
-      this.setState({
-        isLoaded: true
-      })
     }
   }
 

@@ -52,6 +52,7 @@ class SignUp extends React.Component {
             setData('users', users)
             setData('counters', counters)
             setData('loggedUserId', counters.userId)
+            setData('isAuth', true)
             this.props.handleAuth(true)
         }
         this.handleResetForm()

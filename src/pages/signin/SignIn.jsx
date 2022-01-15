@@ -39,6 +39,7 @@ class SignIn extends React.Component {
             alert('Wrong password')
         } else {
             setData('loggedUserId', user.id)
+            setData('isAuth', true)
             this.props.handleAuth(true)
         }
         this.handleResetForm()
