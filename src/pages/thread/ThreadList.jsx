@@ -1,7 +1,7 @@
 import React from 'react'
 import ThreadItem from './ThreadItem'
 import { getData, setData } from '../../utils/dataUtils'
-import { ButtonSubmit } from '../../components/Button'
+import { Button, ButtonSubmit } from '../../components/Button'
 import { getFormatedDate } from '../../utils/utils'
 
 class ThreadList extends React.Component {
@@ -35,6 +35,12 @@ class ThreadList extends React.Component {
         this.setState({
             name: '',
             body: ''
+        })
+    }
+
+    handleListAddToggle = (value) => {
+        this.setState({
+            threadListAddIsActive: value
         })
     }
 
@@ -80,6 +86,7 @@ class ThreadList extends React.Component {
                 <ThreadListNav />
                 <ThreadListAdd
                     handleChange={this.handleChange}
+                    handleListAddToggle={this.handleListAddToggle}
                     handleThreadAdd={this.handleThreadAdd}
                     state={this.state} />
                 {threadItemList}
@@ -98,18 +105,22 @@ const ThreadListNav = () => {
 }
 
 const ThreadListAdd = (props) => {
-    const { handleChange, handleThreadAdd, state } = props
+    const { handleChange, handleListAddToggle, handleThreadAdd, state } = props
 
-    return (
-        <form onSubmit={handleThreadAdd}>
-            <label>
-                ThreadListAdd
+    if (state.threadListAddIsActive) {
+        return (
+            <form onSubmit={handleThreadAdd}>
                 <input type="text" name="name" value={state.name} placeholder='Enter post title' onChange={handleChange} />
                 <input type="text" name="body" value={state.body} placeholder='Enter post body' onChange={handleChange} />
-            </label>
-            <ButtonSubmit>Add Thread</ButtonSubmit>
-        </form>
-    )
+                <Button handleMethod={() => handleListAddToggle(false)}>Cancel</Button>
+                <ButtonSubmit>Add Thread</ButtonSubmit>
+            </form>
+        )
+    } else {
+        return (
+            <Button handleMethod={() => handleListAddToggle(true)}>Add Thread</Button>
+        )
+    }
 }
 
 const ThreadListFooter = () => {
