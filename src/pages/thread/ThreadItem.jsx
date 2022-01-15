@@ -1,44 +1,57 @@
 import React from 'react'
+import { getData } from '../../utils/dataUtils'
 
-const ThreadItem = () => {
+const ThreadItem = (props) => {
+    const { thread } = props
+    const users = getData('users')
+    const user = users.find(user => user.id === thread.userId)
+
     return (
         <article>
-            <ThreadItemAside />
-            <ThreadItemHeader />
-            <ThreadItemBody />
-            <ThreadItemFooter />
+            <ThreadItemAside thread={thread} user={user} />
+            <ThreadItemHeader thread={thread} />
+            <ThreadItemBody thread={thread} />
+            <ThreadItemFooter thread={thread} />
         </article>
     )
 }
 
-const ThreadItemAside = () => {
+const ThreadItemAside = (props) => {
+    const { user } = props
+
     return (
         <aside>
-            <p>ThreadAside</p>
+            <p>{user.name}</p>
         </aside>
     )
 }
 
-const ThreadItemHeader = () => {
+const ThreadItemHeader = (props) => {
+    const { thread } = props
+
     return (
         <header>
-            <p>ThreadHeader</p>
+            <p>{thread.name}</p>
         </header>
     )
 }
 
-const ThreadItemBody = () => {
+const ThreadItemBody = (props) => {
+    const { thread } = props
+
     return (
         <main>
-            <p>ThreadBody</p>
+            <p>{thread.body}</p>
         </main>
     )
 }
 
-const ThreadItemFooter = () => {
+const ThreadItemFooter = (props) => {
+    const { thread } = props
+
     return (
         <footer>
-            <p>ThreadFooter</p>
+            <p>{thread.date}</p>
         </footer>
     )
 }

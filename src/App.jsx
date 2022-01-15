@@ -8,13 +8,10 @@ import Loading from './components/Loading'
 import { checkData, setData, getData } from './utils/dataUtils'
 
 class App extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      error: null,
-      isLoaded: false,
-      isAuth: false,
-    }
+  state = {
+    error: null,
+    isLoaded: false,
+    isAuth: false,
   }
 
   handleAuth = (value) => {

@@ -1,15 +1,32 @@
 import React from 'react'
 import ThreadItem from './ThreadItem'
+import { getData } from '../../utils/dataUtils'
 
-const ThreadList = () => {
-    return (
-        <section>
-            <ThreadListNav />
-            <ThreadListAdd />
-            <ThreadItem />
-            <ThreadListFooter />
-        </section>
-    )
+class ThreadList extends React.Component {
+    state = {
+        threads: [],
+        users: [],
+    }
+
+    threadItemList = () => {
+        const threads = getData('threads')
+
+        const threadItemList = threads.map(thread => <ThreadItem key={thread.id} thread={thread} />)
+        return threadItemList
+    }
+
+    render() {
+        const threadItemList = this.threadItemList()
+
+        return (
+            <section>
+                <ThreadListNav />
+                <ThreadListAdd />
+                {threadItemList}
+                <ThreadListFooter />
+            </section>
+        )
+    }
 }
 
 const ThreadListNav = () => {

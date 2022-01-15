@@ -1,5 +1,6 @@
 const getData = (value) => {
     const getData = JSON.parse(localStorage.getItem(value))
+
     return (getData)
 }
 
