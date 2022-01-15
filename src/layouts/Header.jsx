@@ -1,10 +1,24 @@
 import React from 'react'
 
-const Header = () => {
+const Header = (props) => {
+    const { isAuth } = props
+
     return (
         <header>
-            <h1>Header</h1>
+            {isAuth ? <HeaderLoggetIn /> : <HeaderLoggetOut />}
         </header>
+    )
+}
+
+const HeaderLoggetIn = () => {
+    return (
+        <p>HeaderLoggedIn</p>
+    )
+}
+
+const HeaderLoggetOut = () => {
+    return (
+        <p>HeaderLoggedOut</p>
     )
 }
 

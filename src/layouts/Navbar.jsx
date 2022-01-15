@@ -1,6 +1,7 @@
 import React from 'react'
 import Button from '../components/Button'
 import { NavLink } from "react-router-dom"
+import { removeData } from '../utils/dataUtils'
 
 const Navbar = (props) => {
     const { handleAuth } = props
@@ -15,7 +16,10 @@ const Navbar = (props) => {
                 <li><NavLink to='/thread'>Thread</NavLink></li>
                 <li><NavLink to='/user'>User</NavLink></li>
             </ul>
-            <Button handleMethod={() => handleAuth(false)}>Sing Out</Button>
+            <Button handleMethod={() => {
+                handleAuth(false)
+                removeData('loggedUserId')
+            }}>Sing Out</Button>
         </nav>
     )
 }

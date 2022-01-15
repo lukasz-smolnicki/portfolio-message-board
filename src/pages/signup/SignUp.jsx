@@ -49,9 +49,6 @@ class SignUp extends React.Component {
                 date: getFormatedDate()
             }
             users.push(newUser)
-            this.setState({
-                loggedUserId: counters.userId
-            })
             setData('users', users)
             setData('counters', counters)
             setData('loggedUserId', counters.userId)

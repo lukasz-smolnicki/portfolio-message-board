@@ -5,7 +5,7 @@ import Main from './layouts/Main'
 import Footer from './layouts/Footer'
 import Error from './components/Error'
 import Loading from './components/Loading'
-import { checkData, setData, removeData } from './utils/dataUtils'
+import { checkData, setData } from './utils/dataUtils'
 
 class App extends Component {
   constructor(props) {
@@ -18,7 +18,6 @@ class App extends Component {
   }
 
   handleAuth = (value) => {
-    removeData('loggedUserId')
     this.setState({
       isAuth: value
     })
@@ -70,8 +69,8 @@ class App extends Component {
     } else {
       return (
         <>
-          <Navbar handleAuth={this.handleAuth} />
-          <Header />
+          <Navbar isAuth={this.state.isAuth} handleAuth={this.handleAuth} />
+          <Header isAuth={this.state.isAuth} />
           <Main handleAuth={this.handleAuth} />
           <Footer />
         </>
