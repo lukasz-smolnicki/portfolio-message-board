@@ -10,11 +10,10 @@ const ThreadItemEdit = (props) => {
     return (
         <article>
             <ThreadItemEditAside user={user} />
-            <form onSubmit={
-                () => {
-                    handleThreadEdit(thread, name, body)
-                    handleToggle('isEdit', false)
-                }}>
+            <form onSubmit={() => {
+                handleThreadEdit(thread, name, body)
+                handleToggle('isEdit', false)
+            }}>
                 <ThreadItemEditHeader thread={thread} name={name} handleChange={handleChange} />
                 <ThreadItemEditBody thread={thread} body={body} handleChange={handleChange} />
                 <ThreadItemEditFooter thread={thread} user={user} isDelete={isDelete} handleToggle={handleToggle} />
