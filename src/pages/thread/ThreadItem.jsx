@@ -66,7 +66,7 @@ const ThreadItemFooterButtons = (props) => {
         return (
             <>
                 <Button handleMethod={() => handleToggle('isDelete', false)}>Cancel</Button>
-                <Button handleMethod={(e) => handleThreadDelete(e, thread)}>Apply</Button>
+                <Button handleMethod={() => handleThreadDelete(thread)}>Apply</Button>
             </>
         )
     } else {

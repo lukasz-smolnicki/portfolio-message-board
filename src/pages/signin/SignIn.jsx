@@ -26,8 +26,7 @@ class SignIn extends React.Component {
         })
     }
 
-    handleSignIn = (e) => {
-        e.preventDefault()
+    handleSignIn = () => {
         const users = getData('users')
         const user = users.find(user => user.name === this.state.name)
 

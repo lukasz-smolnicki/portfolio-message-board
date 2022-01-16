@@ -29,8 +29,7 @@ class SignUp extends React.Component {
         })
     }
 
-    handleSignUp = (e) => {
-        e.preventDefault()
+    handleSignUp = () => {
         const users = getData('users')
         const counters = getData('counters')
         const user = users.find(user => user.name === this.state.name)

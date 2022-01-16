@@ -39,15 +39,14 @@ class ThreadList extends React.Component {
         })
     }
 
-    handleListAddToggle = (value) => {
+    handletThreadAddToggle = (value) => {
         this.setState({
             threadListAddIsActive: value
         })
+        this.handleResetForm()
     }
 
-    handleThreadAdd = (e) => {
-        e.preventDefault()
-
+    handleThreadAdd = () => {
         const loggedUserId = getData('loggedUserId')
         const counters = getData('counters')
         const threads = getData('threads')
@@ -70,13 +69,11 @@ class ThreadList extends React.Component {
             })
             setData('threads', threads)
             setData('counters', counters)
+            this.handleResetForm()
         }
-        this.handleResetForm()
     }
 
-    handleThreadEdit = (e, thread, name, body) => {
-        e.preventDefault()
-
+    handleThreadEdit = (thread, name, body) => {
         const threads = this.state.threads
         const id = thread.id
         const threadIndex = threads.findIndex(thread => thread.id === id)
@@ -90,8 +87,7 @@ class ThreadList extends React.Component {
         })
     }
 
-    handleThreadDelete = (e, thread) => {
-        e.preventDefault()
+    handleThreadDelete = (thread) => {
         const threads = this.state.threads
         const posts = getData('posts')
         const id = thread.id
@@ -120,7 +116,7 @@ class ThreadList extends React.Component {
                 <ThreadListNav />
                 {loggedUserId && <ThreadListAdd
                     handleChange={this.handleChange}
-                    handleListAddToggle={this.handleListAddToggle}
+                    handletThreadAddToggle={this.handletThreadAddToggle}
                     handleThreadAdd={this.handleThreadAdd}
                     state={this.state} />}
                 {threadList}
@@ -139,20 +135,20 @@ const ThreadListNav = () => {
 }
 
 const ThreadListAdd = (props) => {
-    const { handleChange, handleListAddToggle, handleThreadAdd, state } = props
+    const { handleChange, handletThreadAddToggle, handleThreadAdd, state } = props
 
     if (state.threadListAddIsActive) {
         return (
             <form onSubmit={handleThreadAdd}>
                 <input type="text" name="name" value={state.name} placeholder='Enter post title' onChange={handleChange} />
                 <input type="text" name="body" value={state.body} placeholder='Enter post body' onChange={handleChange} />
-                <Button handleMethod={() => handleListAddToggle(false)}>Cancel</Button>
+                <Button handleMethod={() => handletThreadAddToggle(false)}>Cancel</Button>
                 <ButtonSubmit>Add Thread</ButtonSubmit>
             </form>
         )
     } else {
         return (
-            <Button handleMethod={() => handleListAddToggle(true)}>Add Thread</Button>
+            <Button handleMethod={() => handletThreadAddToggle(true)}>Add Thread</Button>
         )
     }
 }
