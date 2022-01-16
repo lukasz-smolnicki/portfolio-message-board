@@ -1,17 +1,18 @@
 import React from 'react'
 import { getData } from '../../utils/dataUtils'
+import { Button } from '../../components/Button'
 
 const ThreadItem = (props) => {
-    const { thread } = props
+    const { thread, isDelete, handleToggle } = props
     const users = getData('users')
     const user = users.find(user => user.id === thread.userId)
 
     return (
         <article>
-            <ThreadItemAside thread={thread} user={user} />
+            <ThreadItemAside user={user} />
             <ThreadItemHeader thread={thread} />
             <ThreadItemBody thread={thread} />
-            <ThreadItemFooter thread={thread} />
+            <ThreadItemFooter thread={thread} user={user} isDelete={isDelete} handleToggle={handleToggle} />
         </article>
     )
 }
@@ -47,13 +48,35 @@ const ThreadItemBody = (props) => {
 }
 
 const ThreadItemFooter = (props) => {
-    const { thread } = props
+    const { thread, user, isDelete, handleToggle } = props
+    const loggedUserId = getData('loggedUserId')
 
     return (
-        <footer>
+        < footer >
             <p>{thread.date}</p>
-        </footer>
+            {(loggedUserId === user.id) && <ThreadItemFooterButtons isDelete={isDelete} handleToggle={handleToggle} />}
+        </footer >
     )
+}
+
+const ThreadItemFooterButtons = (props) => {
+    const { isDelete, handleToggle } = props
+
+    if (isDelete) {
+        return (
+            <>
+                <Button handleMethod={() => handleToggle('isDelete', false)}>Cancel</Button>
+                <Button handleMethod={true}>Apply</Button>
+            </>
+        )
+    } else {
+        return (
+            <>
+                <Button handleMethod={() => handleToggle('isEdit', true)}>Edit thread</Button>
+                <Button handleMethod={() => handleToggle('isDelete', true)}>Remove thread</Button>
+            </>
+        )
+    }
 }
 
 export default ThreadItem

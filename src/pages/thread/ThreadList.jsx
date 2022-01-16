@@ -1,5 +1,5 @@
 import React from 'react'
-import ThreadItem from './ThreadItem'
+import Thread from './Thread'
 import { getData, setData } from '../../utils/dataUtils'
 import { Button, ButtonSubmit } from '../../components/Button'
 import { getFormatedDate } from '../../utils/utils'
@@ -72,24 +72,41 @@ class ThreadList extends React.Component {
         this.handleResetForm()
     }
 
-    threadItemList = () => {
+    handleThreadEdit = (e, thread, name, body) => {
+        e.preventDefault()
+
+        const threads = this.state.threads
+        const id = thread.id
+        const threadIndex = threads.findIndex(thread => thread.id === id)
+
+        threads[threadIndex].name = name
+        threads[threadIndex].body = body
+        threads[threadIndex].editDate = getFormatedDate()
+        setData('threads', threads)
+        this.setState({
+            threads
+        })
+    }
+
+    threadList = () => {
         const threads = this.state.threads
 
-        return threads.map(thread => <ThreadItem key={thread.id} thread={thread} />)
+        return threads.map(thread => <Thread key={thread.id} thread={thread} handleThreadEdit={this.handleThreadEdit} />)
     }
 
     render() {
-        const threadItemList = this.threadItemList()
+        const threadList = this.threadList()
+        const loggedUserId = getData('loggedUserId')
 
         return (
             <section>
                 <ThreadListNav />
-                <ThreadListAdd
+                {loggedUserId && <ThreadListAdd
                     handleChange={this.handleChange}
                     handleListAddToggle={this.handleListAddToggle}
                     handleThreadAdd={this.handleThreadAdd}
-                    state={this.state} />
-                {threadItemList}
+                    state={this.state} />}
+                {threadList}
                 <ThreadListFooter />
             </section>
         )
