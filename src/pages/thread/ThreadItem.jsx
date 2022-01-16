@@ -3,7 +3,7 @@ import { getData } from '../../utils/dataUtils'
 import { Button } from '../../components/Button'
 
 const ThreadItem = (props) => {
-    const { thread, isDelete, handleToggle } = props
+    const { thread, isDelete, handleToggle, handleThreadDelete } = props
     const users = getData('users')
     const user = users.find(user => user.id === thread.userId)
 
@@ -12,7 +12,7 @@ const ThreadItem = (props) => {
             <ThreadItemAside user={user} />
             <ThreadItemHeader thread={thread} />
             <ThreadItemBody thread={thread} />
-            <ThreadItemFooter thread={thread} user={user} isDelete={isDelete} handleToggle={handleToggle} />
+            <ThreadItemFooter thread={thread} user={user} isDelete={isDelete} handleToggle={handleToggle} handleThreadDelete={handleThreadDelete} />
         </article>
     )
 }
@@ -48,25 +48,25 @@ const ThreadItemBody = (props) => {
 }
 
 const ThreadItemFooter = (props) => {
-    const { thread, user, isDelete, handleToggle } = props
+    const { thread, user, isDelete, handleToggle, handleThreadDelete } = props
     const loggedUserId = getData('loggedUserId')
 
     return (
         < footer >
             <p>{thread.date}</p>
-            {(loggedUserId === user.id) && <ThreadItemFooterButtons isDelete={isDelete} handleToggle={handleToggle} />}
+            {(loggedUserId === user.id) && <ThreadItemFooterButtons thread={thread} isDelete={isDelete} handleToggle={handleToggle} handleThreadDelete={handleThreadDelete} />}
         </footer >
     )
 }
 
 const ThreadItemFooterButtons = (props) => {
-    const { isDelete, handleToggle } = props
+    const { thread, isDelete, handleToggle, handleThreadDelete } = props
 
     if (isDelete) {
         return (
             <>
                 <Button handleMethod={() => handleToggle('isDelete', false)}>Cancel</Button>
-                <Button handleMethod={true}>Apply</Button>
+                <Button handleMethod={(e) => handleThreadDelete(e, thread)}>Apply</Button>
             </>
         )
     } else {

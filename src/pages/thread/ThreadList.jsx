@@ -26,6 +26,7 @@ class ThreadList extends React.Component {
     handleChange = (e) => {
         const name = e.target.name
         const value = e.target.value
+
         this.setState({
             [name]: value
         })
@@ -46,6 +47,7 @@ class ThreadList extends React.Component {
 
     handleThreadAdd = (e) => {
         e.preventDefault()
+
         const loggedUserId = getData('loggedUserId')
         const counters = getData('counters')
         const threads = getData('threads')
@@ -88,10 +90,25 @@ class ThreadList extends React.Component {
         })
     }
 
+    handleThreadDelete = (e, thread) => {
+        e.preventDefault()
+        const threads = this.state.threads
+        const posts = getData('posts')
+        const id = thread.id
+        const threadsFiltered = threads.filter(thread => thread.id !== id)
+        const postsFiltered = posts.filter(post => post.threadId !== id)
+
+        setData('threads', threadsFiltered)
+        setData('posts', postsFiltered)
+        this.setState({
+            threads: threadsFiltered
+        })
+    }
+
     threadList = () => {
         const threads = this.state.threads
 
-        return threads.map(thread => <Thread key={thread.id} thread={thread} handleThreadEdit={this.handleThreadEdit} />)
+        return threads.map(thread => <Thread key={thread.id} isAuth={this.props.isAuth} thread={thread} handleThreadEdit={this.handleThreadEdit} handleThreadDelete={this.handleThreadDelete} />)
     }
 
     render() {

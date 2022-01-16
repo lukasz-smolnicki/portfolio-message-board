@@ -1,7 +1,7 @@
 {
     "counters": {
         "userId": 2,
-        "postId": 1,
+        "postId": 2,
         "threadId": 2
     },
     "users": [{
@@ -37,8 +37,14 @@
     "posts": [{
         "id": 1,
         "userId": 1,
-        "titleId": 1,
+        "threadId": 1,
         "body": "Post id 1",
         "date": "2021-12-18 10:50"
+    }, {
+        "id": 2,
+        "userId": 2,
+        "threadId": 2,
+        "body": "Post id 2",
+        "date": "2021-12-18 10:53"
     }]
 }
