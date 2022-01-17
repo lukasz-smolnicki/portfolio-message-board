@@ -1,8 +1,8 @@
 import React from 'react'
 import Thread from './Thread'
-import { getData, setData } from '../../utils/dataUtils'
+import { getData, setData } from '../../utilities/dataUtils'
 import { Button, ButtonSubmit } from '../../components/Button'
-import { getFormatedDate } from '../../utils/utils'
+import { getFormatedDate } from '../../utilities/utils'
 
 class ThreadList extends React.Component {
     constructor(props) {

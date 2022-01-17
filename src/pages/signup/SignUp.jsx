@@ -1,7 +1,7 @@
 import React from 'react'
 import { ButtonSubmit } from '../../components/Button'
-import { getData, setData } from '../../utils/dataUtils'
-import { getFormatedDate } from '../../utils/utils'
+import { getData, setData } from '../../utilities/dataUtils'
+import { getFormatedDate } from '../../utilities/utils'
 
 class SignUp extends React.Component {
     constructor(props) {

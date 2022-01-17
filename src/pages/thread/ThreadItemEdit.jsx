@@ -1,5 +1,5 @@
 import React from 'react'
-import { getData } from '../../utils/dataUtils'
+import { getData } from '../../utilities/dataUtils'
 import { Button, ButtonSubmit } from '../../components/Button'
 
 const ThreadItemEdit = (props) => {

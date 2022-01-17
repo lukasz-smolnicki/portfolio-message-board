@@ -8,7 +8,7 @@ import SignUp from '../pages/signup/SignUp'
 import ThreadList from '../pages/thread/ThreadList'
 import UserList from '../pages/user/UserList'
 import NotFound from '../components/NotFound'
-import { ProtectedLogin } from '../utils/protectedRouts'
+import { ProtectedLogin } from '../utilities/protectedRouts'
 
 const Main = (props) => {
     const { isAuth, handleAuth } = props
@@ -23,7 +23,7 @@ const Main = (props) => {
                     <Route path="/signin" element={<SignIn handleAuth={handleAuth} />} />
                     <Route path="/signup" element={<SignUp handleAuth={handleAuth} />} />
                 </Route>
-                <Route path="/thread" element={<ThreadList isAuth={isAuth} />} />
+                <Route path="/thread/:id" element={<ThreadList isAuth={isAuth} />} />
                 <Route path="/user" element={<UserList />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
