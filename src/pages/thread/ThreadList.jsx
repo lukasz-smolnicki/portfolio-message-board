@@ -3,6 +3,8 @@ import Thread from './Thread'
 import { getData, setData } from '../../utilities/dataUtils'
 import { Button, ButtonSubmit } from '../../components/Button'
 import { getFormatedDate } from '../../utilities/utils'
+import { useParams } from 'react-router-dom';
+import Pagination from '../../components/Pagination'
 
 class ThreadList extends React.Component {
     constructor(props) {
@@ -110,6 +112,7 @@ class ThreadList extends React.Component {
     render() {
         const threadList = this.threadList()
         const loggedUserId = getData('loggedUserId')
+        const params = this.props.params
 
         return (
             <section>
@@ -120,7 +123,7 @@ class ThreadList extends React.Component {
                     handleThreadAdd={this.handleThreadAdd}
                     state={this.state} />}
                 {threadList}
-                <ThreadListFooter />
+                <ThreadListFooter threads={this.state.threads} params={params} />
             </section>
         )
     }
@@ -153,12 +156,19 @@ const ThreadListAdd = (props) => {
     }
 }
 
-const ThreadListFooter = () => {
+const ThreadListFooter = (props) => {
+    const { params, threads } = props
     return (
         <footer>
-            <p>ThreadListFooter</p>
+            <Pagination array={threads} route={'thread/'} site={params.site} divide={10} />
         </footer>
     )
 }
 
-export default ThreadList
+const ThreadListNavigation = (props) => {
+    const params = useParams()
+
+    return <ThreadList {...props} params={params} />;
+}
+
+export default ThreadListNavigation

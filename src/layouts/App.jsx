@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import Navbar from './layouts/Navbar'
-import Header from './layouts/Header'
-import Main from './layouts/Main'
-import Footer from './layouts/Footer'
-import Error from './components/Error'
-import Loading from './components/Loading'
-import { checkData, setData, getData } from './utils/dataUtils'
+import Navbar from './Navbar'
+import Header from './Header'
+import Main from './Main'
+import Footer from './Footer'
+import Error from '../components/Error'
+import Loading from '../components/Loading'
+import { checkData, setData, getData } from '../utilities/dataUtils'
 
 class App extends Component {
   constructor(props) {

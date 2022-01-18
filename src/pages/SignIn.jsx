@@ -1,6 +1,6 @@
 import React from 'react'
-import { ButtonSubmit } from '../../components/Button'
-import { getData, setData } from '../../utilities/dataUtils'
+import { ButtonSubmit } from '../components/Button'
+import { getData, setData } from '../utilities/dataUtils'
 
 class SignIn extends React.Component {
     constructor(props) {

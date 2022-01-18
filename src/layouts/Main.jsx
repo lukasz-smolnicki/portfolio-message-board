@@ -1,10 +1,10 @@
 import React from 'react'
 import { Routes, Route } from "react-router-dom"
-import About from '../pages/about/About'
-import Home from '../pages/home/Home'
+import About from '../pages/About'
+import Home from '../pages/Home'
 import PostList from '../pages/post/PostList'
-import SignIn from '../pages/signin/SignIn'
-import SignUp from '../pages/signup/SignUp'
+import SignIn from '../pages/SignIn'
+import SignUp from '../pages/SignUp'
 import ThreadList from '../pages/thread/ThreadList'
 import UserList from '../pages/user/UserList'
 import NotFound from '../components/NotFound'
@@ -23,7 +23,7 @@ const Main = (props) => {
                     <Route path="/signin" element={<SignIn handleAuth={handleAuth} />} />
                     <Route path="/signup" element={<SignUp handleAuth={handleAuth} />} />
                 </Route>
-                <Route path="/thread/:id" element={<ThreadList isAuth={isAuth} />} />
+                <Route path="/thread/:site" element={<ThreadList isAuth={isAuth} />} />
                 <Route path="/user" element={<UserList />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
