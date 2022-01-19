@@ -14,7 +14,8 @@ class ThreadList extends React.Component {
             users: [],
             threadListAddIsActive: false,
             name: '',
-            body: ''
+            body: '',
+            paginationItemsPerSite: 10
         }
     }
 
@@ -104,9 +105,12 @@ class ThreadList extends React.Component {
     }
 
     threadList = () => {
-        const threads = this.state.threads
+        const { threads, paginationItemsPerSite } = this.state
+        const { params } = this.props
+        const sitePaginationIndex = params.site * paginationItemsPerSite
+        const sitePagination = threads.slice(sitePaginationIndex - paginationItemsPerSite, sitePaginationIndex)
 
-        return threads.map(thread => <Thread key={thread.id} isAuth={this.props.isAuth} thread={thread} handleThreadEdit={this.handleThreadEdit} handleThreadDelete={this.handleThreadDelete} />)
+        return sitePagination.map(thread => <Thread key={thread.id} isAuth={this.props.isAuth} thread={thread} handleThreadEdit={this.handleThreadEdit} handleThreadDelete={this.handleThreadDelete} />)
     }
 
     render() {
@@ -123,7 +127,7 @@ class ThreadList extends React.Component {
                     handleThreadAdd={this.handleThreadAdd}
                     state={this.state} />}
                 {threadList}
-                <ThreadListFooter threads={this.state.threads} params={params} />
+                <ThreadListFooter threads={this.state.threads} params={params} paginationItemsPerSite={this.state.paginationItemsPerSite} />
             </section>
         )
     }
@@ -157,10 +161,11 @@ const ThreadListAdd = (props) => {
 }
 
 const ThreadListFooter = (props) => {
-    const { params, threads } = props
+    const { params, threads, paginationItemsPerSite } = props
+
     return (
         <footer>
-            <Pagination array={threads} route={'thread/'} site={params.site} divide={10} />
+            <Pagination array={threads} route={'/thread/'} site={params.site} paginationItemsPerSite={paginationItemsPerSite} />
         </footer>
     )
 }
