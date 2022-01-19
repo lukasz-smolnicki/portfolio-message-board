@@ -6,7 +6,7 @@ const Pagination = (props) => {
     const siteIndex = parseInt(site)
     console.log((siteIndex < 1))
 
-    if (typeof array !== 'undefined' && array.length > 0 && ((array.length / paginationItemsPerSite) + 1) > siteIndex && siteIndex > 1) {
+    if (typeof array !== 'undefined' && array.length > 0 && ((array.length / paginationItemsPerSite) + 1) > siteIndex && siteIndex > 0) {
         const threadsCounter = array.length
         const threadsPerPage = paginationItemsPerSite
         const currentPage = siteIndex
@@ -48,7 +48,7 @@ const Pagination = (props) => {
         )
     } else {
         return (
-            <>No threads</>
+            <li><NavLink to={`${route}${1}`}>{'Back to list'}</NavLink></li>
         )
     }
 }
