@@ -1,9 +1,10 @@
 import React from 'react'
 
-const Error = () => {
+const Error = (props) => {
+    const { message } = props
     return (
         <div>
-            <p>Error</p>
+            <p>{message}</p>
         </div>
     )
 }

@@ -5,6 +5,8 @@ import { Button, ButtonSubmit } from '../../components/Button'
 import { getFormatedDate } from '../../utilities/utils'
 import { useParams } from 'react-router-dom';
 import Pagination from '../../components/Pagination'
+import Error from '../../components/Error'
+import SortItems from '../../components/SortItems'
 
 class ThreadList extends React.Component {
     constructor(props) {
@@ -15,7 +17,8 @@ class ThreadList extends React.Component {
             threadListAddIsActive: false,
             name: '',
             body: '',
-            paginationItemsPerSite: 10
+            paginationItemsPerSite: 10,
+            sortItemsBy: '1'
         }
     }
 
@@ -104,13 +107,57 @@ class ThreadList extends React.Component {
         })
     }
 
+    handleSortItems = (threads) => {
+        switch (this.state.sortItemsBy) {
+            case '1':
+                threads.sort((a, b) => {
+                    const c = new Date(a.date)
+                    const d = new Date(b.date)
+                    return d - c
+                })
+                break;
+            case '2':
+                threads.sort((a, b) => {
+                    const c = new Date(a.date)
+                    const d = new Date(b.date)
+                    return c - d
+                })
+                break;
+            case '3':
+                threads.sort((a, b) => a.name.localeCompare(b.name))
+                break;
+            case '4':
+                threads.sort((a, b) => b.name.localeCompare(a.name))
+                break;
+            case '5':
+                threads.sort((a, b) => a.body.localeCompare(b.body))
+                break;
+            case '6':
+                threads.sort((a, b) => b.body.localeCompare(a.body))
+                break;
+            default:
+                threads.sort((a, b) => {
+                    const c = new Date(a.date)
+                    const d = new Date(b.date)
+                    return c - d
+                })
+        }
+    }
+
     threadList = () => {
         const { threads, paginationItemsPerSite } = this.state
         const { params } = this.props
-        const sitePaginationIndex = params.site * paginationItemsPerSite
-        const sitePagination = threads.slice(sitePaginationIndex - paginationItemsPerSite, sitePaginationIndex)
-
-        return sitePagination.map(thread => <Thread key={thread.id} isAuth={this.props.isAuth} thread={thread} handleThreadEdit={this.handleThreadEdit} handleThreadDelete={this.handleThreadDelete} />)
+        this.handleSortItems(threads)
+        const siteIndex = parseInt(params.site)
+        const sitePaginationIndex = siteIndex * paginationItemsPerSite
+        const siteOfThreads = threads.slice(sitePaginationIndex - paginationItemsPerSite, sitePaginationIndex)
+        if (typeof threads !== 'undefined' && threads.length > 0 && ((threads.length / paginationItemsPerSite) + 1) > siteIndex && siteIndex > 0) {
+            return siteOfThreads.map(thread => <Thread key={thread.id} isAuth={this.props.isAuth} thread={thread} handleThreadEdit={this.handleThreadEdit} handleThreadDelete={this.handleThreadDelete} />)
+        } else {
+            return (
+                <Error message='Threads not found' />
+            )
+        }
     }
 
     render() {
@@ -120,7 +167,7 @@ class ThreadList extends React.Component {
 
         return (
             <section>
-                <ThreadListNav />
+                <ThreadListNav handleChange={this.handleChange} sortItemsBy={this.state.sortItemsBy} />
                 {loggedUserId && <ThreadListAdd
                     handleChange={this.handleChange}
                     handletThreadAddToggle={this.handletThreadAddToggle}
@@ -133,10 +180,20 @@ class ThreadList extends React.Component {
     }
 }
 
-const ThreadListNav = () => {
+const ThreadListNav = (props) => {
+    const { handleChange, sortItemsBy } = props
+    const sortOptions = [
+        { value: '1', content: 'Sort Newest to Oldest' },
+        { value: '2', content: 'Sort Oldest to Newest' },
+        { value: '3', content: 'By title, A to Z' },
+        { value: '4', content: 'By title, Z to A' },
+        { value: '5', content: 'By content, A to Z' },
+        { value: '6', content: 'By content, Z to A' },
+    ]
+
     return (
         <nav>
-            <p>ThreadListNav</p>
+            <SortItems name='sortItemsBy' value={sortItemsBy} sortOptions={sortOptions} handleChange={handleChange} />
         </nav>
     )
 }

@@ -4,7 +4,6 @@ import { NavLink } from 'react-router-dom'
 const Pagination = (props) => {
     const { array, route, site, paginationItemsPerSite } = props
     const siteIndex = parseInt(site)
-    console.log((siteIndex < 1))
 
     if (typeof array !== 'undefined' && array.length > 0 && ((array.length / paginationItemsPerSite) + 1) > siteIndex && siteIndex > 0) {
         const threadsCounter = array.length
