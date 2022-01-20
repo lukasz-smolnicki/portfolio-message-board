@@ -3,7 +3,7 @@ import Thread from './Thread'
 import { getData, setData } from '../../utilities/dataUtils'
 import { Button, ButtonSubmit } from '../../components/Button'
 import { getFormatedDate } from '../../utilities/utils'
-import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom'
 import Pagination from '../../components/Pagination'
 import Error from '../../components/Error'
 import SortItems from '../../components/SortItems'
@@ -118,26 +118,26 @@ class ThreadList extends React.Component {
                     const d = new Date(b.date)
                     return d - c
                 })
-                break;
+                break
             case '2':
                 threads.sort((a, b) => {
                     const c = new Date(a.date)
                     const d = new Date(b.date)
                     return c - d
                 })
-                break;
+                break
             case '3':
                 threads.sort((a, b) => a.name.localeCompare(b.name))
-                break;
+                break
             case '4':
                 threads.sort((a, b) => b.name.localeCompare(a.name))
-                break;
+                break
             case '5':
                 threads.sort((a, b) => a.body.localeCompare(b.body))
-                break;
+                break
             case '6':
                 threads.sort((a, b) => b.body.localeCompare(a.body))
-                break;
+                break
             default:
                 threads.sort((a, b) => {
                     const c = new Date(a.date)
@@ -147,14 +147,42 @@ class ThreadList extends React.Component {
         }
     }
 
+    handleFilterItems = (threads, users) => {
+        const { filterInputValue, filterSelectValue } = this.state
+
+        if (filterInputValue === '') {
+            return threads
+        } else {
+            let filteredData
+            switch (filterSelectValue) {
+                case '1':
+                    filteredData = threads.filter(thread => thread.name.toLowerCase().includes(filterInputValue.toLowerCase()))
+                    break;
+                case '2':
+                    filteredData = threads.filter(thread => thread.body.toLowerCase().includes(filterInputValue.toLowerCase()))
+                    break;
+                case '3':
+                    const filteredUsers = users.filter(user => user.name.toLowerCase().includes(filterInputValue.toLowerCase()))
+                    const filteredUsersIdArrray = filteredUsers.map(filteredUser => filteredUser.id)
+                    filteredData = threads.filter(thread => filteredUsersIdArrray.includes(thread.userId))
+                    break;
+                default:
+                    filteredData = threads.filter(thread => thread.name.toLowerCase().includes(this.state.search.toLowerCase()))
+                    break;
+            }
+            return filteredData
+        }
+    }
+
     threadList = () => {
-        const { threads, paginationItemsPerSite } = this.state
+        const { threads, users, paginationItemsPerSite } = this.state
         const { params } = this.props
         this.handleSortItems(threads)
+        const filteredData = this.handleFilterItems(threads, users)
         const siteIndex = parseInt(params.site)
         const sitePaginationIndex = siteIndex * paginationItemsPerSite
-        const siteOfThreads = threads.slice(sitePaginationIndex - paginationItemsPerSite, sitePaginationIndex)
-        if (typeof threads !== 'undefined' && threads.length > 0 && ((threads.length / paginationItemsPerSite) + 1) > siteIndex && siteIndex > 0) {
+        const siteOfThreads = filteredData.slice(sitePaginationIndex - paginationItemsPerSite, sitePaginationIndex)
+        if (typeof filteredData !== 'undefined' && filteredData.length > 0 && ((filteredData.length / paginationItemsPerSite) + 1) > siteIndex && siteIndex > 0) {
             return siteOfThreads.map(thread => <Thread key={thread.id} isAuth={this.props.isAuth} thread={thread} handleThreadEdit={this.handleThreadEdit} handleThreadDelete={this.handleThreadDelete} />)
         } else {
             return (
@@ -239,7 +267,7 @@ const ThreadListFooter = (props) => {
 const ThreadListNavigation = (props) => {
     const params = useParams()
 
-    return <ThreadList {...props} params={params} />;
+    return <ThreadList {...props} params={params} />
 }
 
 export default ThreadListNavigation
