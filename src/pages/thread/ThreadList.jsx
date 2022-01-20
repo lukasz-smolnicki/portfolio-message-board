@@ -7,6 +7,7 @@ import { useParams } from 'react-router-dom';
 import Pagination from '../../components/Pagination'
 import Error from '../../components/Error'
 import SortItems from '../../components/SortItems'
+import FilterItems from '../../components/FilterItems'
 
 class ThreadList extends React.Component {
     constructor(props) {
@@ -18,7 +19,9 @@ class ThreadList extends React.Component {
             name: '',
             body: '',
             paginationItemsPerSite: 10,
-            sortItemsBy: '1'
+            sortItemsBy: '1',
+            filterSelectValue: '1',
+            filterInputValue: ''
         }
     }
 
@@ -167,7 +170,7 @@ class ThreadList extends React.Component {
 
         return (
             <section>
-                <ThreadListNav handleChange={this.handleChange} sortItemsBy={this.state.sortItemsBy} />
+                <ThreadListNav handleChange={this.handleChange} filterInputValue={this.state.filterInputValue} filterSelectValue={this.state.filterSelectValue} />
                 {loggedUserId && <ThreadListAdd
                     handleChange={this.handleChange}
                     handletThreadAddToggle={this.handletThreadAddToggle}
@@ -181,18 +184,24 @@ class ThreadList extends React.Component {
 }
 
 const ThreadListNav = (props) => {
-    const { handleChange, sortItemsBy } = props
+    const { handleChange, sortItemsBy, filterInputValue, filterSelectValue } = props
     const sortOptions = [
         { value: '1', content: 'Sort Newest to Oldest' },
         { value: '2', content: 'Sort Oldest to Newest' },
         { value: '3', content: 'By title, A to Z' },
         { value: '4', content: 'By title, Z to A' },
         { value: '5', content: 'By content, A to Z' },
-        { value: '6', content: 'By content, Z to A' },
+        { value: '6', content: 'By content, Z to A' }
+    ]
+    const filterOptions = [
+        { value: '1', content: 'By title' },
+        { value: '2', content: 'By content' },
+        { value: '3', content: 'By author' }
     ]
 
     return (
         <nav>
+            <FilterItems filterOptions={filterOptions} filterInputName='filterInputValue' filterSelectName='filterSelectValue' filterInputValue={filterInputValue} filterSelectValue={filterSelectValue} handleChange={handleChange} />
             <SortItems name='sortItemsBy' value={sortItemsBy} sortOptions={sortOptions} handleChange={handleChange} />
         </nav>
     )
