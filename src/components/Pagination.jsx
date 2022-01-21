@@ -3,12 +3,11 @@ import { NavLink } from 'react-router-dom'
 
 const Pagination = (props) => {
     const { array, route, site, paginationItemsPerSite } = props
-    const siteIndex = parseInt(site)
+    const currentPage = parseInt(site)
 
-    if (typeof array !== 'undefined' && array.length > 0 && ((array.length / paginationItemsPerSite) + 1) > siteIndex && siteIndex > 0) {
+    if (typeof array !== 'undefined' && array.length > 0 && ((array.length / paginationItemsPerSite) + 1) > currentPage > 0) {
         const threadsCounter = array.length
         const threadsPerPage = paginationItemsPerSite
-        const currentPage = siteIndex
         const arrayOfSites = []
         let pagesNumber = Math.floor(threadsCounter / threadsPerPage)
         const pagesNumberModulo = (threadsCounter % threadsPerPage)
@@ -33,21 +32,23 @@ const Pagination = (props) => {
         }
 
         for (let i = firstPageNumber; i <= lastPageNumber; i++) {
-            arrayOfSites.push(<li key={i}><NavLink to={`${route}${i}`}>{i}</NavLink></li>)
+            arrayOfSites.push(<li className={`page-item ${currentPage === i && 'active'}`} key={i}><NavLink className='page-link' to={`${route}${i}`}>{i}</NavLink></li>)
         }
 
         return (
-            <>
-                {currentPage > 1 && <li><NavLink to={`${route}${1}`}>{'<<'}</NavLink></li>}
-                {currentPage > 1 && <li><NavLink to={`${route}${currentPage - 1}`}>{'<'}</NavLink></li>}
+            <ul className='pagination'>
+                <li className={`page-item ${currentPage < 2 && 'disabled'}`}><NavLink className='page-link' to={`${route}${1}`}>{'<<'}</NavLink></li>
+                <li className={`page-item ${currentPage < 2 && 'disabled'}`}><NavLink className='page-link' to={`${route}${currentPage - 1}`}>{'Previous'}</NavLink></li>
                 {arrayOfSites}
-                {currentPage < pagesNumber && <li><NavLink to={`${route}${currentPage + 1}`}>{'>'}</NavLink></li>}
-                {currentPage < pagesNumber && <li><NavLink to={`${route}${pagesNumber}`}>{'>>'}</NavLink></li>}
-            </>
+                <li className={`page-item ${currentPage >= pagesNumber && 'disabled'}`}><NavLink className='page-link' to={`${route}${currentPage + 1}`}>{'Next'}</NavLink></li>
+                <li className={`page-item ${currentPage >= pagesNumber && 'disabled'}`}><NavLink className='page-link' to={`${route}${pagesNumber}`}>{'>>'}</NavLink></li>
+            </ul>
         )
     } else {
         return (
-            <li><NavLink to={`${route}${1}`}>{'Back to list'}</NavLink></li>
+            <ul className='pagination'>
+                <li className='page-item'><NavLink className='page-link' to={`${route}${1}`}>{'Back to list'}</NavLink></li>
+            </ul>
         )
     }
 }

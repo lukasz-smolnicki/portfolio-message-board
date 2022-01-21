@@ -85,9 +85,11 @@ class App extends Component {
       return (
         <>
           <Navbar isAuth={this.state.isAuth} handleAuth={this.handleAuth} />
-          <Header isAuth={this.state.isAuth} />
-          <Main isAuth={this.state.isAuth} handleAuth={this.handleAuth} />
-          <Footer />
+          <div className='container'>
+            <Header isAuth={this.state.isAuth} />
+            <Main isAuth={this.state.isAuth} handleAuth={this.handleAuth} />
+            <Footer />
+          </div>
         </>
       )
     }
