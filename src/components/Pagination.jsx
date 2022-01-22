@@ -2,6 +2,7 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { useMediaQuery } from 'react-responsive'
 import { useNavigate } from 'react-router-dom'
+import { getData } from '../utilities/dataUtils'
 
 const Pagination = (props) => {
     const { array, route, site, paginationItemsPerSite } = props
@@ -54,7 +55,7 @@ const Pagination = (props) => {
             return (
                 <ul className='pagination pagination-sm'>
                     <li className={`page-item ${currentPage < 2 && 'disabled'}`}><NavLink className='page-link' to={`${route}${1}`}>{'<<'}</NavLink></li>
-                    <li className='page-item'><form onSubmit={navigateTo}><input type='number' min='1' max={pagesNumber} defaultValue={inputValue} placeholder={currentPage} className='page-link' /></form></li>
+                    <li className='page-item'><form onSubmit={navigateTo}><input type='number' min='1' max={pagesNumber} defaultValue={inputValue} placeholder={currentPage} className='page-link text-center' /></form></li>
                     <li><span className='page-link'> of {pagesNumber}</span></li>
                     <li className={`page-item ${currentPage >= pagesNumber && 'disabled'}`}><NavLink className='page-link' to={`${route}${pagesNumber}`}>{'>>'}</NavLink></li>
                 </ul>
@@ -71,11 +72,11 @@ const Pagination = (props) => {
             )
         }
     } else {
-        return (
-            <ul className='pagination'>
+        const filteredData = getData('filteredData')
+        return filteredData.length !== 0 &&
+            <ul className='pagination pagination-sm'>
                 <li className='page-item'><NavLink className='page-link' to={`${route}${1}`}>{'Back to list'}</NavLink></li>
             </ul>
-        )
     }
 }
 

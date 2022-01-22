@@ -182,6 +182,7 @@ class ThreadList extends React.Component {
         const { params } = this.props
         this.handleSortItems(threads)
         const filteredData = this.handleFilterItems(threads, users)
+        setData('filteredData', filteredData)
         const siteIndex = parseInt(params.site)
         const sitePaginationIndex = siteIndex * paginationItemsPerSite
         const siteOfThreads = filteredData.slice(sitePaginationIndex - paginationItemsPerSite, sitePaginationIndex)
@@ -275,10 +276,11 @@ const ThreadListAdd = (props) => {
 
 const ThreadListFooter = (props) => {
     const { params, threads, paginationItemsPerSite } = props
+    const filteredData = getData('filteredData')
 
     return (
         <footer className='d-flex justify-content-center'>
-            <Pagination array={threads} route={'/thread/'} site={params.site} paginationItemsPerSite={paginationItemsPerSite} />
+            <Pagination array={filteredData} route={'/thread/'} site={params.site} paginationItemsPerSite={paginationItemsPerSite} />
         </footer>
     )
 }
