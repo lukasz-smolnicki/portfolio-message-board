@@ -1,41 +1,41 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import { getData } from '../utilities/dataUtils'
 
 const Header = (props) => {
     const { isAuth } = props
 
     return (
-        <header className="jumbotron">
+        <header className='jumbotron'>
             {isAuth ? <HeaderLoggedIn /> : <HeaderLoggedOut />}
         </header>
     )
 }
 
 const HeaderLoggedIn = () => {
+    const loggedUserId = getData('loggedUserId')
+    const users = getData('users')
+    const user = users.find(user => user.id === loggedUserId)
+
     return (
         <>
-            <h1 className="display-4">Hello, world!</h1>
-            <p className="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-            <hr className="my-4" />
-            <p>Now you should SignIn using login: 'Wookie' password: 'hireme' or create your own account using SignUp tab.</p>
-            <p className="lead">
-
-                <NavLink className="btn btn-primary btn-lg" to='' role="button">Sign In</NavLink>
-            </p>
+            <h1 className='display-4'>Hello, {user.name}!</h1>
+            <p className='lead'>This is a simple message board aplication for my portfolio.</p>
+            <p>Now you can add, edit, remove threads and posts. For more info go to section</p>
+            <hr className='my-4' />
         </>
     )
 }
 
 const HeaderLoggedOut = () => {
+
     return (
         <>
-            <h1 className="display-4">Hello, world!</h1>
-            <p className="lead">This is a simple message board aplication for my portfolio.</p>
-            <hr className="my-4" />
+            <h1 className='display-4'>Hello, world!</h1>
+            <p className='lead'>This is a simple message board aplication for my portfolio.</p>
+
             <p>Now you should SignIn using login: 'Wookie' password: 'hireme' or create your own account using SignUp tab.</p>
-            <p className="lead">
-                <NavLink className="btn btn-primary btn-lg" to='/signin' role="button">Sign In</NavLink>
-            </p>
+            <hr className='my-4' />
         </>
     )
 }

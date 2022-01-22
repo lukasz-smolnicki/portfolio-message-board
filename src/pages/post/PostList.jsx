@@ -25,9 +25,9 @@ const PostListAdd = () => {
         <form>
             <label>
                 PostListAdd
-                <input type="text" name="name" />
+                <input type='text' name='name' />
             </label>
-            <input type="submit" value="Wyślij" />
+            <input type='submit' value='Wyślij' />
         </form>
     )
 }

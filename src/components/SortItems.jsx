@@ -6,7 +6,7 @@ const SortItems = (props) => {
 
     return (
         <form>
-            <select name={name} value={value} onChange={handleChange}>
+            <select className='form-select form-select-sm' name={name} value={value} onChange={handleChange}>
                 {options}
             </select>
         </form>

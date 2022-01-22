@@ -6,12 +6,9 @@ const ShowItemsNumber = (props) => {
 
     return (
         <form>
-            <label>
-                {props.children}
-                <select name={name} value={value} onChange={handleChange}>
-                    {options}
-                </select>
-            </label>
+            <select className='form-select form-select-sm' name={name} value={value} onChange={handleChange}>
+                {options}
+            </select>
         </form>
 
     )

@@ -6,11 +6,12 @@ const FilterItems = (props) => {
 
     return (
         <form>
-            <input name={filterInputName} value={filterInputValue} onChange={handleChange} />
-
-            <select name={filterSelectName} value={filterSelectValue} onChange={handleChange} >
-                {options}
-            </select>
+            <div className='input-group input-group-sm'>
+                <input type='text' className='form-control' name={filterInputName} value={filterInputValue} placeholder='Search..' onChange={handleChange} />
+                <select className='form-select' name={filterSelectName} value={filterSelectValue} onChange={handleChange} >
+                    {options}
+                </select>
+            </div>
         </form>
     )
 }

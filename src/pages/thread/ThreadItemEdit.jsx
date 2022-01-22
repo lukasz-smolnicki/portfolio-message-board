@@ -39,7 +39,7 @@ const ThreadItemEditHeader = (props) => {
         <header>
             <label>
                 Name:
-                <input type="text" name="name" value={name} placeholder='Enter name' onChange={handleChange} />
+                <input type='text' name='name' value={name} placeholder='Enter name' onChange={handleChange} />
             </label>
         </header>
     )
@@ -52,7 +52,7 @@ const ThreadItemEditBody = (props) => {
         <main>
             <label>
                 Body:
-                <input type="text" name="body" value={body} placeholder='Enter body' onChange={handleChange} />
+                <input type='text' name='body' value={body} placeholder='Enter body' onChange={handleChange} />
             </label>
         </main>
     )

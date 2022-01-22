@@ -7,7 +7,7 @@ const Navbar = (props) => {
     const { isAuth, handleAuth } = props
 
     return (
-        <nav className='navbar navbar-expand-sm sticky-top navbar-light'>
+        <nav className='navbar navbar-expand-sm sticky-top navbar-light bg-white'>
             <div className='container'>
                 <NavLink className='navbar-brand' to='/thread/1'>Board</NavLink>
                 <button className='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarNav' aria-controls='navbarNav' aria-expanded='false' aria-label='Toggle navigation'>
@@ -30,7 +30,7 @@ const NavbarSignedIn = (props) => {
         <>
             <li className='nav-item'><NavLink className='nav-link' to='/about'>About</NavLink></li>
             <li className='nav-item'><NavLink className='nav-link' to='/user'>Profile</NavLink></li>
-            <Button className="btn btn-primary" handleMethod={() => {
+            <Button className='btn btn-secondary' handleMethod={() => {
                 handleAuth(false)
                 removeData('loggedUserId')
                 setData('isAuth', false)

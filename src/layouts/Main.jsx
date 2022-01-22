@@ -1,5 +1,5 @@
 import React from 'react'
-import { Routes, Route, Navigate } from "react-router-dom"
+import { Routes, Route, Navigate } from 'react-router-dom'
 import About from '../pages/About'
 import PostList from '../pages/post/PostList'
 import SignIn from '../pages/SignIn'
@@ -15,16 +15,16 @@ const Main = (props) => {
     return (
         <main>
             <Routes>
-                <Route path="/" element={<Navigate to={`/thread/1`} />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/post" element={<PostList />} />
+                <Route path='/' element={<Navigate to={`/thread/1`} />} />
+                <Route path='/about' element={<About />} />
+                <Route path='/post' element={<PostList />} />
                 <Route element={<ProtectedLogin isAuth={isAuth} />} >
-                    <Route path="/signin" element={<SignIn handleAuth={handleAuth} />} />
-                    <Route path="/signup" element={<SignUp handleAuth={handleAuth} />} />
+                    <Route path='/signin' element={<SignIn handleAuth={handleAuth} />} />
+                    <Route path='/signup' element={<SignUp handleAuth={handleAuth} />} />
                 </Route>
-                <Route path="/thread/:site" element={<ThreadList isAuth={isAuth} />} />
-                <Route path="/user" element={<UserList />} />
-                <Route path="*" element={<Error message='Page not found' />} />
+                <Route path='/thread/:site' element={<ThreadList isAuth={isAuth} />} />
+                <Route path='/user' element={<UserList />} />
+                <Route path='*' element={<Error message='Page not found' />} />
             </Routes>
         </main>
     )

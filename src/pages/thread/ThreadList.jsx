@@ -160,18 +160,18 @@ class ThreadList extends React.Component {
             switch (filterSelectValue) {
                 case '1':
                     filteredData = threads.filter(thread => thread.name.toLowerCase().includes(filterInputValue.toLowerCase()))
-                    break;
+                    break
                 case '2':
                     filteredData = threads.filter(thread => thread.body.toLowerCase().includes(filterInputValue.toLowerCase()))
-                    break;
+                    break
                 case '3':
                     const filteredUsers = users.filter(user => user.name.toLowerCase().includes(filterInputValue.toLowerCase()))
                     const filteredUsersIdArrray = filteredUsers.map(filteredUser => filteredUser.id)
                     filteredData = threads.filter(thread => filteredUsersIdArrray.includes(thread.userId))
-                    break;
+                    break
                 default:
                     filteredData = threads.filter(thread => thread.name.toLowerCase().includes(filterInputValue.toLowerCase()))
-                    break;
+                    break
             }
             return filteredData
         }
@@ -237,10 +237,19 @@ const ThreadListNav = (props) => {
     ]
 
     return (
-        <nav>
-            <FilterItems filterOptions={filterOptions} filterInputName='filterInputValue' filterSelectName='filterSelectValue' filterInputValue={filterInputValue} filterSelectValue={filterSelectValue} handleChange={handleChange} />
-            <SortItems name='sortItemsBy' value={sortItemsBy} sortOptions={sortOptions} handleChange={handleChange} />
-            <ShowItemsNumber name='showItemsNumber' value={showItemsNumber} showItemsOptions={showItemsOptions} handleChange={handleChange}>Show:</ShowItemsNumber>
+        <nav className='row'>
+            <div className='col-sm-2 mb-2'>
+                <ShowItemsNumber name='showItemsNumber' value={showItemsNumber} showItemsOptions={showItemsOptions} handleChange={handleChange} />
+            </div>
+            <div className='col-sm-4 mb-2'>
+                <SortItems name='sortItemsBy' value={sortItemsBy} sortOptions={sortOptions} handleChange={handleChange} />
+            </div>
+            <div className='col-sm-6 mb-2'>
+                <FilterItems filterOptions={filterOptions} filterInputName='filterInputValue' filterSelectName='filterSelectValue' filterInputValue={filterInputValue} filterSelectValue={filterSelectValue} handleChange={handleChange} />
+            </div>
+
+
+
         </nav>
     )
 }
@@ -251,8 +260,8 @@ const ThreadListAdd = (props) => {
     if (state.threadListAddIsActive) {
         return (
             <form onSubmit={handleThreadAdd}>
-                <input type="text" name="name" value={state.name} placeholder='Enter post title' onChange={handleChange} />
-                <input type="text" name="body" value={state.body} placeholder='Enter post body' onChange={handleChange} />
+                <input type='text' name='name' value={state.name} placeholder='Enter post title' onChange={handleChange} />
+                <input type='text' name='body' value={state.body} placeholder='Enter post body' onChange={handleChange} />
                 <Button handleMethod={() => handletThreadAddToggle(false)}>Cancel</Button>
                 <ButtonSubmit>Add Thread</ButtonSubmit>
             </form>
@@ -268,7 +277,7 @@ const ThreadListFooter = (props) => {
     const { params, threads, paginationItemsPerSite } = props
 
     return (
-        <footer>
+        <footer className='d-flex justify-content-center'>
             <Pagination array={threads} route={'/thread/'} site={params.site} paginationItemsPerSite={paginationItemsPerSite} />
         </footer>
     )
