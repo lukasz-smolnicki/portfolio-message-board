@@ -72,8 +72,7 @@ const Pagination = (props) => {
             )
         }
     } else {
-        const filteredData = getData('filteredData')
-        return filteredData.length !== 0 &&
+        return array.length !== 0 &&
             <ul className='pagination pagination-sm'>
                 <li className='page-item'><NavLink className='page-link' to={`${route}${1}`}>{'Back to list'}</NavLink></li>
             </ul>

@@ -1,63 +1,37 @@
 import React from 'react'
 import { getData } from '../../utilities/dataUtils'
 import { Button } from '../../components/Button'
+import { Link } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEdit, faTrashAlt, faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
 
 const ThreadItem = (props) => {
     const { thread, isDelete, handleToggle, handleThreadDelete } = props
     const users = getData('users')
     const user = users.find(user => user.id === thread.userId)
-
-    return (
-        <article>
-            <ThreadItemAside user={user} />
-            <ThreadItemHeader thread={thread} />
-            <ThreadItemBody thread={thread} />
-            <ThreadItemFooter thread={thread} user={user} isDelete={isDelete} handleToggle={handleToggle} handleThreadDelete={handleThreadDelete} />
-        </article>
-    )
-}
-
-const ThreadItemAside = (props) => {
-    const { user } = props
-
-    return (
-        <aside>
-            <p>{user.name}</p>
-        </aside>
-    )
-}
-
-const ThreadItemHeader = (props) => {
-    const { thread } = props
-
-    return (
-        <header>
-            <p>{thread.name}</p>
-        </header>
-    )
-}
-
-const ThreadItemBody = (props) => {
-    const { thread } = props
-
-    return (
-        <main>
-            <p>{thread.body}</p>
-        </main>
-    )
-}
-
-const ThreadItemFooter = (props) => {
-    const { thread, user, isDelete, handleToggle, handleThreadDelete } = props
     const loggedUserId = getData('loggedUserId')
 
     return (
-        < footer >
-            <p>{thread.date}</p>
-            {(loggedUserId === user.id) && <ThreadItemFooterButtons thread={thread} isDelete={isDelete} handleToggle={handleToggle} handleThreadDelete={handleThreadDelete} />}
-        </footer >
+        <>
+            <div to='/' className='list-group-item'>
+                <div className='row'>
+                    <div className='col-12 d-flex justify-content-between'>
+                        <small className='mb-1 pe-2'><Link className='link' to=''>{thread.name}</Link></small>
+                        <small className='text-muted text-nowrap'>3 days ago</small>
+                    </div>
+                    <div className='col-12 d-flex justify-content-between'>
+                        <small className='text-muted'>Created by: {user.name} in {thread.date}</small>
+                        <div>
+                            {(loggedUserId === user.id) && <ThreadItemFooterButtons thread={thread} isDelete={isDelete} handleToggle={handleToggle} handleThreadDelete={handleThreadDelete} />}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </>
     )
 }
+
+
 
 const ThreadItemFooterButtons = (props) => {
     const { thread, isDelete, handleToggle, handleThreadDelete } = props
@@ -65,15 +39,16 @@ const ThreadItemFooterButtons = (props) => {
     if (isDelete) {
         return (
             <>
-                <Button handleMethod={() => handleToggle('isDelete', false)}>Cancel</Button>
-                <Button handleMethod={() => handleThreadDelete(thread)}>Apply</Button>
+                <span>Do you want to delete post?</span>
+                <Button className='btn btn-sm text-danger' handleMethod={() => handleToggle('isDelete', false)}><FontAwesomeIcon icon={faTimes} /></Button>
+                <Button className='btn btn-sm text-success' handleMethod={() => handleThreadDelete(thread)}><FontAwesomeIcon icon={faCheck} /></Button>
             </>
         )
     } else {
         return (
             <>
-                <Button handleMethod={() => handleToggle('isEdit', true)}>Edit thread</Button>
-                <Button handleMethod={() => handleToggle('isDelete', true)}>Remove thread</Button>
+                <Button className='btn btn-sm text-primary' handleMethod={() => handleToggle('isEdit', true)}><FontAwesomeIcon icon={faEdit} /></Button>
+                <Button className='btn btn-sm text-primary' handleMethod={() => handleToggle('isDelete', true)}><FontAwesomeIcon icon={faTrashAlt} /></Button>
             </>
         )
     }

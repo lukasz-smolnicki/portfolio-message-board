@@ -9,6 +9,8 @@ import Error from '../../components/Error'
 import SortItems from '../../components/SortItems'
 import FilterItems from '../../components/FilterItems'
 import ShowItemsNumber from '../../components/ShowItemsNumber'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
 
 class ThreadList extends React.Component {
     constructor(props) {
@@ -56,7 +58,8 @@ class ThreadList extends React.Component {
         this.handleResetForm()
     }
 
-    handleThreadAdd = () => {
+    handleThreadAdd = (e) => {
+        e.preventDefault()
         const loggedUserId = getData('loggedUserId')
         const counters = getData('counters')
         const threads = getData('threads')
@@ -202,13 +205,15 @@ class ThreadList extends React.Component {
 
         return (
             <section>
-                <ThreadListNav handleChange={this.handleChange} filterInputValue={this.state.filterInputValue} filterSelectValue={this.state.filterSelectValue} />
+                <ThreadListNav handleChange={this.handleChange} filterInputValue={this.state.filterInputValue} filterSelectValue={this.state.filterSelectValue} paginationItemsPerSite={this.state.paginationItemsPerSite} />
                 {loggedUserId && <ThreadListAdd
                     handleChange={this.handleChange}
                     handletThreadAddToggle={this.handletThreadAddToggle}
                     handleThreadAdd={this.handleThreadAdd}
                     state={this.state} />}
-                {threadList}
+                <div className='list-group'>
+                    {threadList}
+                </div>
                 <ThreadListFooter threads={this.state.threads} params={params} paginationItemsPerSite={this.state.paginationItemsPerSite} />
             </section>
         )
@@ -216,7 +221,8 @@ class ThreadList extends React.Component {
 }
 
 const ThreadListNav = (props) => {
-    const { handleChange, sortItemsBy, filterInputValue, filterSelectValue, showItemsNumber } = props
+    const { handleChange, sortItemsBy, filterInputValue, filterSelectValue, paginationItemsPerSite } = props
+
     const sortOptions = [
         { value: '1', content: 'Sort Newest to Oldest' },
         { value: '2', content: 'Sort Oldest to Newest' },
@@ -232,15 +238,15 @@ const ThreadListNav = (props) => {
     ]
 
     const showItemsOptions = [
-        { value: '1', content: '5' },
-        { value: '2', content: '10' },
-        { value: '3', content: '20' }
+        { value: 5, content: '5' },
+        { value: 10, content: '10' },
+        { value: 20, content: '20' }
     ]
 
     return (
         <nav className='row'>
             <div className='col-sm-2 mb-2'>
-                <ShowItemsNumber name='showItemsNumber' value={showItemsNumber} showItemsOptions={showItemsOptions} handleChange={handleChange} />
+                <ShowItemsNumber name='paginationItemsPerSite' value={paginationItemsPerSite} showItemsOptions={showItemsOptions} handleChange={handleChange} />
             </div>
             <div className='col-sm-4 mb-2'>
                 <SortItems name='sortItemsBy' value={sortItemsBy} sortOptions={sortOptions} handleChange={handleChange} />
@@ -248,9 +254,6 @@ const ThreadListNav = (props) => {
             <div className='col-sm-6 mb-2'>
                 <FilterItems filterOptions={filterOptions} filterInputName='filterInputValue' filterSelectName='filterSelectValue' filterInputValue={filterInputValue} filterSelectValue={filterSelectValue} handleChange={handleChange} />
             </div>
-
-
-
         </nav>
     )
 }
@@ -260,22 +263,34 @@ const ThreadListAdd = (props) => {
 
     if (state.threadListAddIsActive) {
         return (
-            <form onSubmit={handleThreadAdd}>
-                <input type='text' name='name' value={state.name} placeholder='Enter post title' onChange={handleChange} />
-                <input type='text' name='body' value={state.body} placeholder='Enter post body' onChange={handleChange} />
-                <Button handleMethod={() => handletThreadAddToggle(false)}>Cancel</Button>
-                <ButtonSubmit>Add Thread</ButtonSubmit>
-            </form>
+            <form className='card mb-2' onSubmit={handleThreadAdd}>
+                <div className='card-header'>
+                    <input className='form-control' type='text' name='name' value={state.name} placeholder='Enter post title' onChange={handleChange} />
+                </div>
+                <div className='card-body'>
+                    <input className='form-control' type='textarea' name='body' value={state.body} placeholder='Enter post body' onChange={handleChange} />
+                </div>
+                <div className='card-footer d-flex justify-content-end'>
+                    <div className='d-flex align-items-center me-2'>
+                        <small className='text-muted '>Do you want to add new thread?</small>
+                    </div>
+                    <Button className='btn btn-sm text-danger me-2' handleMethod={() => handletThreadAddToggle(false)}><FontAwesomeIcon icon={faTimes} /></Button>
+                    <ButtonSubmit className='btn btn-sm text-success' ><FontAwesomeIcon icon={faCheck} /></ButtonSubmit>
+                </div>
+            </form >
         )
     } else {
         return (
-            <Button handleMethod={() => handletThreadAddToggle(true)}>Add Thread</Button>
+            <div className='d-flex justify-content-end mb-2'>
+                <Button className='btn btn-primary btn-sm' handleMethod={() => handletThreadAddToggle(true)}>Add Thread</Button>
+            </div>
+
         )
     }
 }
 
 const ThreadListFooter = (props) => {
-    const { params, threads, paginationItemsPerSite } = props
+    const { params, paginationItemsPerSite } = props
     const filteredData = getData('filteredData')
 
     return (

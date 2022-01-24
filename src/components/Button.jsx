@@ -7,8 +7,9 @@ const Button = (props) => {
 }
 
 const ButtonSubmit = (props) => {
+    const { className } = props
 
-    return <button type='submit'>{props.children}</button>
+    return <button className={className} type='submit'>{props.children}</button>
 }
 
 

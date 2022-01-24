@@ -21,7 +21,7 @@ const HeaderLoggedIn = () => {
         <>
             <h1 className='display-4'>Hello, {user.name}!</h1>
             <p className='lead'>This is a simple message board aplication for my portfolio.</p>
-            <p>Now you can add, edit, remove threads and posts. For more info go to section</p>
+            <p>Now you can add, edit, remove threads and posts. For more info go to section about.</p>
             <hr className='my-4' />
         </>
     )
