@@ -211,7 +211,7 @@ class ThreadList extends React.Component {
                     handletThreadAddToggle={this.handletThreadAddToggle}
                     handleThreadAdd={this.handleThreadAdd}
                     state={this.state} />}
-                <div className='list-group'>
+                <div className='list-group mb-2'>
                     {threadList}
                 </div>
                 <ThreadListFooter threads={this.state.threads} params={params} paginationItemsPerSite={this.state.paginationItemsPerSite} />
@@ -268,7 +268,7 @@ const ThreadListAdd = (props) => {
                     <input className='form-control' type='text' name='name' value={state.name} placeholder='Enter post title' onChange={handleChange} />
                 </div>
                 <div className='card-body'>
-                    <input className='form-control' type='textarea' name='body' value={state.body} placeholder='Enter post body' onChange={handleChange} />
+                    <textarea className='form-control' name='body' value={state.body} placeholder='Enter post body' onChange={handleChange} />
                 </div>
                 <div className='card-footer d-flex justify-content-end'>
                     <div className='d-flex align-items-center me-2'>

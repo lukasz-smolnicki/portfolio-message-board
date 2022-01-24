@@ -22,7 +22,7 @@ const ThreadItem = (props) => {
                     <div className='col-12 d-flex justify-content-between'>
                         <small className='text-muted'>Created by: {user.name} in {thread.date}</small>
                         <div>
-                            {(loggedUserId === user.id) && <ThreadItemFooterButtons thread={thread} isDelete={isDelete} handleToggle={handleToggle} handleThreadDelete={handleThreadDelete} />}
+                            {(loggedUserId === user.id) && <ThreadItemButtons thread={thread} isDelete={isDelete} handleToggle={handleToggle} handleThreadDelete={handleThreadDelete} />}
                         </div>
                     </div>
                 </div>
@@ -33,7 +33,7 @@ const ThreadItem = (props) => {
 
 
 
-const ThreadItemFooterButtons = (props) => {
+const ThreadItemButtons = (props) => {
     const { thread, isDelete, handleToggle, handleThreadDelete } = props
 
     if (isDelete) {
