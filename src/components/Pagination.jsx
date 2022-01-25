@@ -53,8 +53,10 @@ const Pagination = (props) => {
             return (
                 <ul className='pagination pagination-sm'>
                     <li className={`page-item ${currentPage < 2 && 'disabled'}`}><NavLink className='page-link' to={`${route}${1}`}>{'<<'}</NavLink></li>
-                    <li className='page-item'><form onSubmit={navigateTo}><input type='number' min='1' max={pagesNumber} defaultValue={inputValue} placeholder={currentPage} className='page-link text-center' /></form></li>
+                    <li className={`page-item ${currentPage < 2 && 'disabled'}`}><NavLink className='page-link' to={`${route}${currentPage - 1}`}>{'<'}</NavLink></li>
+                    <li className='page-item'><form onSubmit={navigateTo}><input type='number' min='1' max={pagesNumber} key={currentPage} defaultValue={currentPage} placeholder={currentPage} className='page-link text-center' /></form></li>
                     <li><span className='page-link'> of {pagesNumber}</span></li>
+                    <li className={`page-item ${currentPage >= pagesNumber && 'disabled'}`}><NavLink className='page-link' to={`${route}${currentPage + 1}`}>{'>'}</NavLink></li>
                     <li className={`page-item ${currentPage >= pagesNumber && 'disabled'}`}><NavLink className='page-link' to={`${route}${pagesNumber}`}>{'>>'}</NavLink></li>
                 </ul>
             )

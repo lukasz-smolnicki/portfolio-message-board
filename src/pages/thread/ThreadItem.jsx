@@ -31,8 +31,6 @@ const ThreadItem = (props) => {
     )
 }
 
-
-
 const ThreadItemButtons = (props) => {
     const { thread, isDelete, handleToggle, handleThreadDelete } = props
 

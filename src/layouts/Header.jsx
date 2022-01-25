@@ -1,5 +1,4 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
 import { getData } from '../utilities/dataUtils'
 
 const Header = (props) => {
@@ -20,7 +19,7 @@ const HeaderLoggedIn = () => {
     return (
         <>
             <h1 className='display-4'>Hello, {user.name}!</h1>
-            <p className='lead'>This is a simple message board aplication for my portfolio.</p>
+            <p className='lead'>This is a simple message forum aplication for my portfolio.</p>
             <p>Now you can add, edit, remove threads and posts. For more info go to section about.</p>
             <hr className='my-4' />
         </>
@@ -31,9 +30,8 @@ const HeaderLoggedOut = () => {
 
     return (
         <>
-            <h1 className='display-4'>Hello, world!</h1>
-            <p className='lead'>This is a simple message board aplication for my portfolio.</p>
-
+            <h1 className='display-4'>Hello, Board!</h1>
+            <p className='lead'>This is a simple message forum aplication for my portfolio.</p>
             <p>Now you should SignIn using login: 'Wookie' password: 'hireme' or create your own account using SignUp tab.</p>
             <hr className='my-4' />
         </>
