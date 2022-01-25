@@ -1,6 +1,7 @@
 import React from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import About from '../pages/About'
+import List from '../pages/List'
 import PostList from '../pages/post/PostList'
 import SignIn from '../pages/SignIn'
 import SignUp from '../pages/SignUp'
@@ -17,6 +18,7 @@ const Main = (props) => {
             <Routes>
                 <Route path='/' element={<Navigate to={`/thread/1`} />} />
                 <Route path='/about' element={<About />} />
+                <Route path='/list/*' element={<List />} />
                 <Route path='/post' element={<PostList />} />
                 <Route element={<ProtectedLogin isAuth={isAuth} />} >
                     <Route path='/signin' element={<SignIn handleAuth={handleAuth} />} />
