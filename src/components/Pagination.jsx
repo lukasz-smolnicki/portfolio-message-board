@@ -2,15 +2,14 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { useMediaQuery } from 'react-responsive'
 import { useNavigate } from 'react-router-dom'
-import { getData } from '../utilities/dataUtils'
 
 const Pagination = (props) => {
     const { array, route, site, paginationItemsPerSite } = props
     const currentPage = parseInt(site)
+    const navigate = useNavigate()
     const isSmall = useMediaQuery({
         query: '(max-width: 576px)'
     })
-    const navigate = useNavigate()
 
     if (typeof array !== 'undefined' && array.length > 0 && ((array.length / paginationItemsPerSite) + 1) > currentPage > 0) {
         const threadsCounter = array.length
@@ -20,7 +19,6 @@ const Pagination = (props) => {
         const pagesNumberModulo = (threadsCounter % threadsPerPage)
         let firstPageNumber = currentPage - 5
         let lastPageNumber = currentPage + 5
-
 
         if (!!pagesNumberModulo) {
             ++pagesNumber

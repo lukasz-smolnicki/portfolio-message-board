@@ -12,5 +12,4 @@ const ButtonSubmit = (props) => {
     return <button className={className} type='submit'>{props.children}</button>
 }
 
-
 export { Button, ButtonSubmit }

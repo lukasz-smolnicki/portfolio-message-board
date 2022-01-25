@@ -10,7 +10,6 @@ const ShowItemsNumber = (props) => {
                 {options}
             </select>
         </form>
-
     )
 }
 
