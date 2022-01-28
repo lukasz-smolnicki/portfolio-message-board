@@ -16,7 +16,7 @@ const ThreadItem = (props) => {
             <div to='/' className='list-group-item'>
                 <div className='row'>
                     <div className='col-12 d-flex justify-content-between'>
-                        <small className='mb-1 pe-2'><Link className='link' to=''>{thread.name}</Link></small>
+                        <small className='mb-1 pe-2'><Link className='link' to={`/post/${thread.id}/1`}>{thread.name}</Link></small>
                         <small className='text-muted text-nowrap'>3 days ago</small>
                     </div>
                     <div className='col-12 d-flex justify-content-between'>
