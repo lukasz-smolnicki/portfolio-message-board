@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ListItems = () => {
+const UserList = () => {
     return (
         <>
 
@@ -8,4 +8,4 @@ const ListItems = () => {
     )
 }
 
-export default ListItems
+export default UserList

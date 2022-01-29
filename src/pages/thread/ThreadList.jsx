@@ -1,15 +1,14 @@
 import React from 'react'
+import Thread from './Thread'
 import { getData, setData } from '../../utilities/dataUtils'
 import { Button, ButtonSubmit } from '../../components/Button'
 import { getFormatedDate } from '../../utilities/utils'
 import { useParams } from 'react-router-dom'
 import Pagination from '../../components/Pagination'
-import SearchBar from '../../components/SearchBar'
-<<<<<<< HEAD
-import ItemsList from '../../components/ItemsList/ItemsList'
-=======
 import Error from '../../components/Error'
->>>>>>> 3569a5b944831e28106ed5a131cf551e396fee27
+import SortItems from '../../components/SortItems'
+import FilterItems from '../../components/FilterItems'
+import ShowItemsNumber from '../../components/ShowItemsNumber'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
 
@@ -52,7 +51,7 @@ class ThreadList extends React.Component {
         })
     }
 
-    handleThreadAddToggle = (value) => {
+    handletThreadAddToggle = (value) => {
         this.setState({
             threadListAddIsActive: value
         })
@@ -181,7 +180,26 @@ class ThreadList extends React.Component {
         }
     }
 
+    threadList = () => {
+        const { threads, users, paginationItemsPerSite } = this.state
+        const { params } = this.props
+        this.handleSortItems(threads)
+        const filteredData = this.handleFilterItems(threads, users)
+        setData('filteredData', filteredData)
+        const siteIndex = parseInt(params.site)
+        const sitePaginationIndex = siteIndex * paginationItemsPerSite
+        const siteOfThreads = filteredData.slice(sitePaginationIndex - paginationItemsPerSite, sitePaginationIndex)
+        if (typeof filteredData !== 'undefined' && filteredData.length > 0 && ((filteredData.length / paginationItemsPerSite) + 1) > siteIndex && siteIndex > 0) {
+            return siteOfThreads.map(thread => <Thread key={thread.id} isAuth={this.props.isAuth} thread={thread} handleThreadEdit={this.handleThreadEdit} handleThreadDelete={this.handleThreadDelete} />)
+        } else {
+            return (
+                <Error message='Threads not found' />
+            )
+        }
+    }
+
     render() {
+        const threadList = this.threadList()
         const loggedUserId = getData('loggedUserId')
         const params = this.props.params
 
@@ -190,19 +208,12 @@ class ThreadList extends React.Component {
                 <ThreadListNav handleChange={this.handleChange} filterInputValue={this.state.filterInputValue} filterSelectValue={this.state.filterSelectValue} paginationItemsPerSite={this.state.paginationItemsPerSite} />
                 {loggedUserId && <ThreadListAdd
                     handleChange={this.handleChange}
-                    handleThreadAddToggle={this.handleThreadAddToggle}
+                    handletThreadAddToggle={this.handletThreadAddToggle}
                     handleThreadAdd={this.handleThreadAdd}
                     state={this.state} />}
-                <ItemsList
-                    params={params}
-                    data={this.state.threads}
-                    paginationItemsPerSite={this.state.paginationItemsPerSite}
-                    handleSortItems={this.handleSortItems}
-                    handleFilterItems={this.handleFilterItems}
-                    isAuth={this.state.isAuth}
-                    handleEdit={this.handleThreadEdit}
-                    handleDelete={this.handleThreadDelete}
-                />
+                <div className='list-group mb-2'>
+                    {threadList}
+                </div>
                 <ThreadListFooter threads={this.state.threads} params={params} paginationItemsPerSite={this.state.paginationItemsPerSite} />
             </section>
         )
@@ -233,21 +244,22 @@ const ThreadListNav = (props) => {
     ]
 
     return (
-        <SearchBar
-            handleChange={handleChange}
-            sortItemsBy={sortItemsBy}
-            filterInputValue={filterInputValue}
-            filterSelectValue={filterSelectValue}
-            paginationItemsPerSite={paginationItemsPerSite}
-            sortOptions={sortOptions}
-            filterOptions={filterOptions}
-            showItemsOptions={showItemsOptions}
-        />
+        <nav className='row'>
+            <div className='col-sm-2 mb-2'>
+                <ShowItemsNumber name='paginationItemsPerSite' value={paginationItemsPerSite} showItemsOptions={showItemsOptions} handleChange={handleChange} />
+            </div>
+            <div className='col-sm-4 mb-2'>
+                <SortItems name='sortItemsBy' value={sortItemsBy} sortOptions={sortOptions} handleChange={handleChange} />
+            </div>
+            <div className='col-sm-6 mb-2'>
+                <FilterItems filterOptions={filterOptions} filterInputName='filterInputValue' filterSelectName='filterSelectValue' filterInputValue={filterInputValue} filterSelectValue={filterSelectValue} handleChange={handleChange} />
+            </div>
+        </nav>
     )
 }
 
 const ThreadListAdd = (props) => {
-    const { handleChange, handleThreadAddToggle, handleThreadAdd, state } = props
+    const { handleChange, handletThreadAddToggle, handleThreadAdd, state } = props
 
     if (state.threadListAddIsActive) {
         return (
@@ -262,7 +274,7 @@ const ThreadListAdd = (props) => {
                     <div className='d-flex align-items-center me-2'>
                         <small className='text-muted '>Do you want to add new thread?</small>
                     </div>
-                    <Button className='btn btn-sm text-danger me-2' handleMethod={() => handleThreadAddToggle(false)}><FontAwesomeIcon icon={faTimes} /></Button>
+                    <Button className='btn btn-sm text-danger me-2' handleMethod={() => handletThreadAddToggle(false)}><FontAwesomeIcon icon={faTimes} /></Button>
                     <ButtonSubmit className='btn btn-sm text-success' ><FontAwesomeIcon icon={faCheck} /></ButtonSubmit>
                 </div>
             </form >
@@ -270,7 +282,7 @@ const ThreadListAdd = (props) => {
     } else {
         return (
             <div className='d-flex justify-content-end mb-2'>
-                <Button className='btn btn-primary btn-sm' handleMethod={() => handleThreadAddToggle(true)}>Add Thread</Button>
+                <Button className='btn btn-primary btn-sm' handleMethod={() => handletThreadAddToggle(true)}>Add Thread</Button>
             </div>
 
         )
