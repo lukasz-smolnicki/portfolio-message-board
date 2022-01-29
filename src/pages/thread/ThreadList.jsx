@@ -6,9 +6,7 @@ import { getFormatedDate } from '../../utilities/utils'
 import { useParams } from 'react-router-dom'
 import Pagination from '../../components/Pagination'
 import Error from '../../components/Error'
-import SortItems from '../../components/SortItems'
-import FilterItems from '../../components/FilterItems'
-import ShowItemsNumber from '../../components/ShowItemsNumber'
+import SearchBar from '../../components/SearchBar'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
 
@@ -244,17 +242,16 @@ const ThreadListNav = (props) => {
     ]
 
     return (
-        <nav className='row'>
-            <div className='col-sm-2 mb-2'>
-                <ShowItemsNumber name='paginationItemsPerSite' value={paginationItemsPerSite} showItemsOptions={showItemsOptions} handleChange={handleChange} />
-            </div>
-            <div className='col-sm-4 mb-2'>
-                <SortItems name='sortItemsBy' value={sortItemsBy} sortOptions={sortOptions} handleChange={handleChange} />
-            </div>
-            <div className='col-sm-6 mb-2'>
-                <FilterItems filterOptions={filterOptions} filterInputName='filterInputValue' filterSelectName='filterSelectValue' filterInputValue={filterInputValue} filterSelectValue={filterSelectValue} handleChange={handleChange} />
-            </div>
-        </nav>
+        <SearchBar
+            handleChange={handleChange}
+            sortItemsBy={sortItemsBy}
+            filterInputValue={filterInputValue}
+            filterSelectValue={filterSelectValue}
+            paginationItemsPerSite={paginationItemsPerSite}
+            sortOptions={sortOptions}
+            filterOptions={filterOptions}
+            showItemsOptions={showItemsOptions}
+        />
     )
 }
 
