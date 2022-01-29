@@ -12,7 +12,7 @@ const PostItem = (props) => {
 
     return (
         <>
-            <div to='/' className='list-group-item'>
+            <div className='list-group-item'>
                 <div className='row'>
                     <div className='col-12 d-flex justify-content-between'>
                         <small className='mb-1 pe-2'>{post.name}</small>

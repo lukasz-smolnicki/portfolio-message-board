@@ -48,7 +48,7 @@ class Post extends React.Component {
     render() {
         const { isEdit, isDelete, name, body } = this.state
         const { isAuth, post, handlePostEdit, handlePostDelete } = this.props
-        console.log(isEdit, isAuth)
+
         if (isEdit) {
             return (
                 <PostItemEdit post={post} name={name} body={body} handleChange={this.handleChange} handleToggle={this.handleToggle} handlePostEdit={handlePostEdit} />
