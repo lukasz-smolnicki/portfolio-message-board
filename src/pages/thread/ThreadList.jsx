@@ -188,7 +188,7 @@ class ThreadList extends React.Component {
         const sitePaginationIndex = siteIndex * paginationItemsPerSite
         const siteOfThreads = filteredData.slice(sitePaginationIndex - paginationItemsPerSite, sitePaginationIndex)
         if (typeof filteredData !== 'undefined' && filteredData.length > 0 && ((filteredData.length / paginationItemsPerSite) + 1) > siteIndex && siteIndex > 0) {
-            return siteOfThreads.map(thread => <Thread key={thread.id} isAuth={this.props.isAuth} thread={thread} handleThreadEdit={this.handleThreadEdit} handleThreadDelete={this.handleThreadDelete} />)
+            return siteOfThreads.map(thread => <Thread key={thread.id} thread={thread} handleThreadEdit={this.handleThreadEdit} handleThreadDelete={this.handleThreadDelete} />)
         } else {
             return (
                 <Error message='Threads not found' />

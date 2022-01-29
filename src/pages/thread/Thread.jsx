@@ -50,8 +50,8 @@ class Thread extends React.Component {
     render() {
         const { isEdit, isDelete, name, body } = this.state
         const { isAuth, thread, handleThreadEdit, handleThreadDelete } = this.props
-
-        if (isEdit && isAuth) {
+        console.log(isAuth)
+        if (isEdit) {
             return (
                 <ThreadItemEdit thread={thread} name={name} body={body} handleChange={this.handleChange} handleToggle={this.handleToggle} handleThreadEdit={handleThreadEdit} />
             )

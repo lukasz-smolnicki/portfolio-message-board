@@ -22,8 +22,7 @@ class PostList extends React.Component {
             filterSelectValue: '1',
             filterInputValue: '',
             postListAddIsActive: false,
-            name: '',
-            body: ''
+            name: ''
         }
     }
 
@@ -37,8 +36,7 @@ class PostList extends React.Component {
 
     handleResetForm = () => {
         this.setState({
-            name: '',
-            body: ''
+            name: ''
         })
     }
 
@@ -47,6 +45,59 @@ class PostList extends React.Component {
             postListAddIsActive: value
         })
         this.handleResetForm()
+    }
+
+    handlePostAdd = (e) => {
+        e.preventDefault()
+        const loggedUserId = getData('loggedUserId')
+        const counters = getData('counters')
+        const posts = getData('posts')
+        const thread = parseInt(this.props.params.thread)
+
+        if (this.state.name === '') {
+            alert('Enter messege')
+        } else {
+            ++counters.postId
+            const newPost = {
+                id: counters.postId,
+                threadId: thread,
+                userId: loggedUserId,
+                name: this.state.name,
+                date: getFormatedDate()
+            }
+            posts.push(newPost)
+            this.setState({
+                postListAddIsActive: false,
+                posts
+            })
+            setData('posts', posts)
+            setData('counters', counters)
+            this.handleResetForm()
+        }
+    }
+
+    handlePostEdit = (post, name) => {
+        const posts = this.state.posts
+        const id = post.id
+        const postIndex = posts.findIndex(post => post.id === id)
+
+        posts[postIndex].name = name
+        posts[postIndex].editDate = getFormatedDate()
+        setData('posts', posts)
+        this.setState({
+            posts
+        })
+    }
+
+    handlePostDelete = (post) => {
+        const posts = this.state.posts
+        const id = post.id
+        const postsFiltered = posts.filter(post => post.id !== id)
+
+        setData('posts', postsFiltered)
+        this.setState({
+            posts: postsFiltered
+        })
     }
 
     handleChange = (e) => {
@@ -116,8 +167,10 @@ class PostList extends React.Component {
     }
 
     postList = () => {
-        const { posts, users, paginationItemsPerSite } = this.state
+        const { users, paginationItemsPerSite } = this.state
+        let { posts } = this.state
         const { params } = this.props
+        posts = posts.filter(post => post.threadId === parseInt(params.thread))
         this.handleSortItems(posts)
         const filteredData = this.handleFilterItems(posts, users)
         setData('filteredData', filteredData)
@@ -125,7 +178,7 @@ class PostList extends React.Component {
         const sitePaginationIndex = siteIndex * paginationItemsPerSite
         const siteOfPosts = filteredData.slice(sitePaginationIndex - paginationItemsPerSite, sitePaginationIndex)
         if (typeof filteredData !== 'undefined' && filteredData.length > 0 && ((filteredData.length / paginationItemsPerSite) + 1) > siteIndex && siteIndex > 0) {
-            return siteOfPosts.map(post => <Post key={post.id} post={post} isAuth={this.props.isAuth} />)
+            return siteOfPosts.map(post => <Post key={post.id} post={post} handlePostDelete={this.handlePostDelete} handlePostEdit={this.handlePostEdit} isAuth={this.props.isAuth} />)
         } else {
             return (
                 <Error message='Posts not found' />
@@ -189,15 +242,12 @@ const PostListNav = (props) => {
 
 const PostListAdd = (props) => {
     const { handleChange, handlePostAddToggle, handlePostAdd, state } = props
-    console.log(state.postListAddIsActive)
+
     if (state.postListAddIsActive) {
         return (
             <form className='card mb-2' onSubmit={handlePostAdd}>
-                <div className='card-header'>
-                    <input className='form-control' type='text' name='name' value={state.name} placeholder='Enter post title' onChange={handleChange} />
-                </div>
                 <div className='card-body'>
-                    <textarea className='form-control' name='body' value={state.body} placeholder='Enter post body' onChange={handleChange} />
+                    <textarea className='form-control' name='name' value={state.name} placeholder='Enter post body' onChange={handleChange} />
                 </div>
                 <div className='card-footer d-flex justify-content-end'>
                     <div className='d-flex align-items-center me-2'>
