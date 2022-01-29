@@ -1,0 +1,40 @@
+{
+    "counters": {
+        "userId": 1,
+        "postId": 1,
+        "threadId": 1
+    },
+    "users": [{
+        "id": 1,
+        "password": "hireme",
+        "email": "wookie@wookie.pl",
+        "name": "Wookie",
+        "profile": {
+            "name": "Regina Farrell",
+            "dob": "1992-10-30"
+        },
+        "roles": [
+            "admin",
+            "owner"
+        ],
+        "date": "2022-01-09"
+    }],
+    "threads": [{
+        "id": 1,
+        "userId": 1,
+        "name": "Testowy temat",
+        "body": "Testowa treść",
+        "editDate": "",
+        "date": "2021-09-09",
+        "isEdited": false
+    }],
+    "posts": [{
+        "id": 1,
+        "threadId": 1,
+        "userId": 1,
+        "name": "Testowy post",
+        "editDate": "",
+        "date": "2021-09-09",
+        "isEdited": false
+    }]
+}
