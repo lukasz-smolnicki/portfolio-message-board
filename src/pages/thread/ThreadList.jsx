@@ -5,7 +5,11 @@ import { getFormatedDate } from '../../utilities/utils'
 import { useParams } from 'react-router-dom'
 import Pagination from '../../components/Pagination'
 import SearchBar from '../../components/SearchBar'
+<<<<<<< HEAD
 import ItemsList from '../../components/ItemsList/ItemsList'
+=======
+import Error from '../../components/Error'
+>>>>>>> 3569a5b944831e28106ed5a131cf551e396fee27
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
 
