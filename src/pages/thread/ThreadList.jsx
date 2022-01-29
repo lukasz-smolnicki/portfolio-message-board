@@ -49,7 +49,7 @@ class ThreadList extends React.Component {
         })
     }
 
-    handletThreadAddToggle = (value) => {
+    handleThreadAddToggle = (value) => {
         this.setState({
             threadListAddIsActive: value
         })
@@ -206,7 +206,7 @@ class ThreadList extends React.Component {
                 <ThreadListNav handleChange={this.handleChange} filterInputValue={this.state.filterInputValue} filterSelectValue={this.state.filterSelectValue} paginationItemsPerSite={this.state.paginationItemsPerSite} />
                 {loggedUserId && <ThreadListAdd
                     handleChange={this.handleChange}
-                    handletThreadAddToggle={this.handletThreadAddToggle}
+                    handleThreadAddToggle={this.handleThreadAddToggle}
                     handleThreadAdd={this.handleThreadAdd}
                     state={this.state} />}
                 <div className='list-group mb-2'>
@@ -256,7 +256,7 @@ const ThreadListNav = (props) => {
 }
 
 const ThreadListAdd = (props) => {
-    const { handleChange, handletThreadAddToggle, handleThreadAdd, state } = props
+    const { handleChange, handleThreadAddToggle, handleThreadAdd, state } = props
 
     if (state.threadListAddIsActive) {
         return (
@@ -271,7 +271,7 @@ const ThreadListAdd = (props) => {
                     <div className='d-flex align-items-center me-2'>
                         <small className='text-muted '>Do you want to add new thread?</small>
                     </div>
-                    <Button className='btn btn-sm text-danger me-2' handleMethod={() => handletThreadAddToggle(false)}><FontAwesomeIcon icon={faTimes} /></Button>
+                    <Button className='btn btn-sm text-danger me-2' handleMethod={() => handleThreadAddToggle(false)}><FontAwesomeIcon icon={faTimes} /></Button>
                     <ButtonSubmit className='btn btn-sm text-success' ><FontAwesomeIcon icon={faCheck} /></ButtonSubmit>
                 </div>
             </form >
@@ -279,7 +279,7 @@ const ThreadListAdd = (props) => {
     } else {
         return (
             <div className='d-flex justify-content-end mb-2'>
-                <Button className='btn btn-primary btn-sm' handleMethod={() => handletThreadAddToggle(true)}>Add Thread</Button>
+                <Button className='btn btn-primary btn-sm' handleMethod={() => handleThreadAddToggle(true)}>Add Thread</Button>
             </div>
 
         )

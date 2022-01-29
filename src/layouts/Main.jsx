@@ -17,7 +17,7 @@ const Main = (props) => {
             <Routes>
                 <Route path='/' element={<Navigate to={`/thread/1`} />} />
                 <Route path='/about' element={<About />} />
-                <Route path='/post' element={<PostList />} />
+                <Route path='/post/:thread/:site' element={<PostList />} />
                 <Route element={<ProtectedLogin isAuth={isAuth} />} >
                     <Route path='/signin' element={<SignIn handleAuth={handleAuth} />} />
                     <Route path='/signup' element={<SignUp handleAuth={handleAuth} />} />
