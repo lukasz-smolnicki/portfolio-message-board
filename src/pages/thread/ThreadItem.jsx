@@ -37,7 +37,7 @@ const ThreadItemButtons = (props) => {
     if (isDelete) {
         return (
             <>
-                <span>Do you want to delete post?</span>
+                <span>Do you want to delete thread?</span>
                 <Button className='btn btn-sm text-danger' handleMethod={() => handleToggle('isDelete', false)}><FontAwesomeIcon icon={faTimes} /></Button>
                 <Button className='btn btn-sm text-success' handleMethod={() => handleThreadDelete(thread)}><FontAwesomeIcon icon={faCheck} /></Button>
             </>
