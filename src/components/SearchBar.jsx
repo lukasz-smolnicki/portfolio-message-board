@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 const SearchBar = (props) => {
     const { handleChange, sortItemsBy, filterInputValue, filterSelectValue, paginationItemsPerSite, showItemsOptions, sortOptions, filterOptions } = props
@@ -15,10 +15,10 @@ const SearchBar = (props) => {
                 <FilterItems filterOptions={filterOptions} filterInputName='filterInputValue' filterSelectName='filterSelectValue' filterInputValue={filterInputValue} filterSelectValue={filterSelectValue} handleChange={handleChange} />
             </div>
         </nav>
-    );
-};
+    )
+}
 
-export default SearchBar;
+export default SearchBar
 
 const ShowItemsNumber = (props) => {
     const { showItemsOptions, handleChange, name, value } = props

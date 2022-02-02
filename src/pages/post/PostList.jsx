@@ -2,7 +2,7 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import { getData, setData } from '../../utilities/dataUtils'
 import Post from './Post'
-import PostThread from './PostThread'
+import PostListHeader from './PostListHeader'
 import Error from '../../components/Error'
 import SearchBar from '../../components/SearchBar'
 import Pagination from '../../components/Pagination'
@@ -200,8 +200,10 @@ class PostList extends React.Component {
                     handlePostAddToggle={this.handlePostAddToggle}
                     handlePostAdd={this.handlePostAdd}
                     state={this.state} />}
-                <PostThread params={params} threads={this.state.threads} users={this.state.users} />
-                {postList}
+                <PostListHeader params={params} />
+                <div className='mb-2'>
+                    {postList}
+                </div>
                 <PostListFooter params={params} paginationItemsPerSite={this.state.paginationItemsPerSite} />
             </section>
         )
