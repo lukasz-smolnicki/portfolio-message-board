@@ -1,10 +1,11 @@
 import React from 'react'
 import Loading from '../../components/Loading'
 import { getData, setData } from '../../utilities/dataUtils'
-import { Button } from '../../components/Button'
+import { Button, ButtonSubmit } from '../../components/Button'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit, faTrashAlt, faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from 'react-router-dom'
+import { getFormatedDate } from '../../utilities/utils'
 
 class PostListHeader extends React.Component {
     constructor(props) {
@@ -14,6 +15,8 @@ class PostListHeader extends React.Component {
             threads: [],
             isDelete: false,
             isEdit: false,
+            name: '',
+            body: '',
         }
     }
 
@@ -24,9 +27,43 @@ class PostListHeader extends React.Component {
         })
     }
 
+    handleChange = (e) => {
+        const name = e.target.name
+        const value = e.target.value
+
+        this.setState({
+            [name]: value
+        })
+    }
+
+    handleResetForm = () => {
+        const { threads } = this.state
+        const { params } = this.props
+        const thread = threads.find(thread => thread.id === parseInt(params.thread))
+        this.setState({
+            name: thread.name,
+            body: thread.body
+        })
+    }
+
     handleToggle = (property, value) => {
         this.setState({
             [property]: value
+        })
+        this.handleResetForm()
+    }
+
+    handleThreadEdit = (thread) => {
+        const { threads, name, body } = this.state
+        const id = thread.id
+        const threadIndex = threads.findIndex(thread => thread.id === id)
+
+        threads[threadIndex].name = name
+        threads[threadIndex].body = body
+        threads[threadIndex].editDate = getFormatedDate()
+        setData('threads', threads)
+        this.setState({
+            threads
         })
     }
 
@@ -52,7 +89,7 @@ class PostListHeader extends React.Component {
             const thread = threads.find(thread => thread.id === parseInt(params.thread))
             if (isEdit) {
                 return (
-                    <PostListHeaderItemEdit />
+                    <PostListHeaderItemEdit thread={thread} state={this.state} isDelete={isDelete} handleToggle={this.handleToggle} handleThreadDelete={this.handleThreadDelete} handleThreadEdit={this.handleThreadEdit} handleChange={this.handleChange} />
                 )
             } else {
                 return (
@@ -92,26 +129,32 @@ const PostListHeaderItem = (props) => {
 }
 
 const PostListHeaderItemEdit = (props) => {
-    const { thread, isDelete, handleToggle, handleThreadDelete } = props
+    const { thread, handleToggle, state, handleChange, handleThreadEdit } = props
+    const { name, body } = state
     const users = getData('users')
     const loggedUserId = getData('loggedUserId')
     const user = users.find(user => user.id === thread.userId)
 
     return (
-        <div className='card mb-2'>
+        <form className='card mb-2' onSubmit={() => {
+            handleThreadEdit(thread)
+            handleToggle('isEdit', false)
+        }}>
             <div className='card-header'>
-                {thread.name}
+                <input className='form-control' type='text' name='name' value={name} placeholder='Title' onChange={handleChange} />
             </div>
             <div className='card-body'>
-                {thread.body}
+                <textarea className='form-control' type='text' name='body' value={body} placeholder='Message' onChange={handleChange} />
             </div>
             <div className='card-footer d-flex justify-content-between'>
                 <small className='text-muted'>Created by: {user.name} in {thread.date}</small>
                 <div>
-                    {(loggedUserId === user.id) && <PostListHeaderItemButtons thread={thread} isDelete={isDelete} handleToggle={handleToggle} handleThreadDelete={handleThreadDelete} />}
+                    <span>Do you want save changes?</span>
+                    <Button className='btn btn-sm text-danger me-2' handleMethod={() => handleToggle('isEdit', false)}><FontAwesomeIcon icon={faTimes} /></Button>
+                    <ButtonSubmit className='btn btn-sm text-success' ><FontAwesomeIcon icon={faCheck} /></ButtonSubmit>
                 </div>
             </div>
-        </div>
+        </form>
     )
 }
 
