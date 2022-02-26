@@ -8,8 +8,8 @@ Message Board App. A system by which users may send, read and reply messages
 
 The main goal is to:
 - build an application using react
-- store is in localhost
-- create reusable objects
+- store data in localhost
+- create reusable components
 - do not repeat the code
 
 ## Technologies Used
@@ -21,16 +21,7 @@ The main goal is to:
 
 ## Features
 
-### Thread List
-
-- [x] Add new thread when user is logged in
-- [x] Delete thread when user is logged in
-- [x] Edit thread when user is logged in
-- [x] Sort list
-- [x] Filter list
-- [x] Display list items number
-
-### Tasks List
+### Thread & Post List
 
 - [x] Add new thread when user is logged in
 - [x] Delete thread when user is logged in
