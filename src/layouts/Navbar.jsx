@@ -1,7 +1,8 @@
 import React from 'react'
-import { Button } from '../components/Button'
-import { NavLink } from 'react-router-dom'
-import { removeData, setData } from '../utilities/dataUtils'
+import { NavLink, Link } from 'react-router-dom'
+import { removeData, setData, getData } from '../utilities/dataUtils'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUser } from '@fortawesome/free-solid-svg-icons'
 
 const Navbar = (props) => {
     const { isAuth, handleAuth } = props
@@ -25,16 +26,27 @@ const Navbar = (props) => {
 
 const NavbarSignedIn = (props) => {
     const { handleAuth } = props
+    const loggedUserId = getData('loggedUserId')
+    const users = getData('users')
+    const user = users.find(user => user.id === loggedUserId)
+
 
     return (
         <>
             <li className='nav-item'><NavLink className='nav-link' to='/about'>About</NavLink></li>
-            <li className='nav-item'><NavLink className='nav-link' to='/user'>Profile</NavLink></li>
-            <Button className='btn btn-secondary' handleMethod={() => {
-                handleAuth(false)
-                removeData('loggedUserId')
-                setData('isAuth', false)
-            }}>Sign Out</Button>
+            <li className="nav-item dropdown">
+                <Link className="nav-link dropdown-toggle" to='#' id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <FontAwesomeIcon icon={faUser} /> {user.name}
+                </Link>
+                <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li className='dropdown-item'><NavLink className='nav-link' to='/user'>Profile</NavLink></li>
+                    <li className='dropdown-item'><Link className='nav-link' to='#' onClick={() => {
+                        handleAuth(false)
+                        removeData('loggedUserId')
+                        setData('isAuth', false)
+                    }}>Sign Out</Link></li>
+                </ul>
+            </li>
         </>
     )
 }
