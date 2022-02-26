@@ -23,9 +23,9 @@ The main goal is to:
 
 ### Thread & Post List
 
-- [x] Add new thread when user is logged in
-- [x] Delete thread when user is logged in
-- [x] Edit thread when user is logged in
+- [x] Add item when user is logged in
+- [x] Delete item when user is logged in
+- [x] Edit item when user is logged in
 - [x] Sort list
 - [x] Filter list
 - [x] Display list items number
@@ -57,7 +57,7 @@ Project is: _in progress_
 
 ## Contact
 
-[Mail](mailto:lukasz.smolnicki@gmail.com)
+[lukasz.smolnicki@gmail.com](mailto:lukasz.smolnicki@gmail.com)
 
 
 
