@@ -6,6 +6,7 @@ import Footer from './Footer'
 import Error from '../components/Error'
 import Loading from '../components/Loading'
 import { checkData, setData, getData } from '../utilities/dataUtils'
+import './App.scss'
 
 class App extends Component {
   constructor(props) {
@@ -85,11 +86,11 @@ class App extends Component {
       return (
         <>
           <Navbar isAuth={this.state.isAuth} handleAuth={this.handleAuth} />
-          <div className='container'>
+          <div className='container main'>
             <Header isAuth={this.state.isAuth} />
             <Main isAuth={this.state.isAuth} handleAuth={this.handleAuth} />
-            <Footer />
           </div>
+          <Footer />
         </>
       )
     }
