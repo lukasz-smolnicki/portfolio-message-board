@@ -11,6 +11,7 @@ The main goal is to:
 - store data in localhost
 - create reusable components
 - do not repeat the code
+- no copy paste from tutorials
 
 ## Technologies Used
 
