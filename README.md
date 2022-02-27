@@ -58,7 +58,3 @@ Project is: _in progress_
 ## Contact
 
 [lukasz.smolnicki@gmail.com](mailto:lukasz.smolnicki@gmail.com)
-
-
-
-

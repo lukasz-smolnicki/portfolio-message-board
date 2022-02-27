@@ -46,17 +46,17 @@ class SignIn extends React.Component {
 
     render() {
         return (
-            <section>
-                <form onSubmit={this.handleSignIn}>
-                    <label>
-                        Name:
-                        <input type='text' name='name' value={this.state.name} placeholder='Enter name' onChange={this.handleChange} />
-                    </label>
-                    <label>
-                        Password:
-                        <input type='password' name='password' value={this.state.password} placeholder='Enter password' onChange={this.handleChange} />
-                    </label>
-                    <ButtonSubmit>SignIn</ButtonSubmit>
+            <section className='d-flex justify-content-center'>
+                <form className='col-2' onSubmit={this.handleSignIn}>
+                    <div className='form-group'>
+                        <label for='exampleInputEmail1'>Email address</label>
+                        <input type='text' name='name' value={this.state.name} placeholder='Enter name' onChange={this.handleChange} className='form-control' id='exampleInputEmail1' aria-describedby='emailHelp' />
+                    </div>
+                    <div className='form-group mb-3'>
+                        <label for='exampleInputPassword1'>Password</label>
+                        <input type='password' name='password' value={this.state.password} placeholder='Enter password' onChange={this.handleChange} className='form-control' id='exampleInputPassword1' />
+                    </div>
+                    <ButtonSubmit className='btn btn-primary w-100 bg-danger'>SignIn</ButtonSubmit>
                 </form>
             </section>
         )

@@ -8,7 +8,7 @@ const Navbar = (props) => {
     const { isAuth, handleAuth } = props
 
     return (
-        <nav className='navbar navbar-expand-sm sticky-top navbar-light bg-light'>
+        <nav className='navbar navbar-expand-sm sticky-top navbar-light bg-danger'>
             <div className='container'>
                 <NavLink className='navbar-brand' to='/thread/1'>Board</NavLink>
                 <button className='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarNav' aria-controls='navbarNav' aria-expanded='false' aria-label='Toggle navigation'>
@@ -34,11 +34,11 @@ const NavbarSignedIn = (props) => {
     return (
         <>
             <li className='nav-item'><NavLink className='nav-link' to='/about'>About</NavLink></li>
-            <li className="nav-item dropdown">
-                <Link className="nav-link dropdown-toggle" to='#' id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <li className='nav-item dropdown'>
+                <Link className='nav-link dropdown-toggle' to='#' id='navbarDropdown' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
                     <FontAwesomeIcon icon={faUser} /> {user.name}
                 </Link>
-                <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                <ul className='dropdown-menu' aria-labelledby='navbarDropdown'>
                     <li className='dropdown-item'><NavLink className='nav-link' to='/user'>Profile</NavLink></li>
                     <li className='dropdown-item'><Link className='nav-link' to='#' onClick={() => {
                         handleAuth(false)
