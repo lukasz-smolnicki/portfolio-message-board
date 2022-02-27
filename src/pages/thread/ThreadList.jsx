@@ -279,7 +279,7 @@ const ThreadListAdd = (props) => {
     } else {
         return (
             <div className='d-flex justify-content-end mb-2'>
-                <Button className='btn btn-primary btn-sm' handleMethod={() => handleThreadAddToggle(true)}>Add Thread</Button>
+                <Button className='btn btn-danger btn-sm' handleMethod={() => handleThreadAddToggle(true)}>Add Thread</Button>
             </div>
 
         )

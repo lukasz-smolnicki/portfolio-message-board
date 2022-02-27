@@ -49,14 +49,14 @@ class SignIn extends React.Component {
             <section className='d-flex justify-content-center'>
                 <form className='col-2' onSubmit={this.handleSignIn}>
                     <div className='form-group'>
-                        <label for='exampleInputEmail1'>Email address</label>
-                        <input type='text' name='name' value={this.state.name} placeholder='Enter name' onChange={this.handleChange} className='form-control' id='exampleInputEmail1' aria-describedby='emailHelp' />
+                        <label htmlFor='userInput'>Email address</label>
+                        <input type='text' name='name' autoComplete='current-user' value={this.state.name} placeholder='Enter name' onChange={this.handleChange} className='form-control' id='userInput' />
                     </div>
                     <div className='form-group mb-3'>
-                        <label for='exampleInputPassword1'>Password</label>
-                        <input type='password' name='password' value={this.state.password} placeholder='Enter password' onChange={this.handleChange} className='form-control' id='exampleInputPassword1' />
+                        <label htmlFor='inputPassword'>Password</label>
+                        <input type='password' name='password' autoComplete='current-password' value={this.state.password} placeholder='Enter password' onChange={this.handleChange} className='form-control' id='inputPassword' />
                     </div>
-                    <ButtonSubmit className='btn btn-primary w-100 bg-danger'>SignIn</ButtonSubmit>
+                    <ButtonSubmit className='btn btn-primary w-100 btn-danger'>SignIn</ButtonSubmit>
                 </form>
             </section>
         )

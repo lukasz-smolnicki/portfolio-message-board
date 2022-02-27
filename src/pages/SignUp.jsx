@@ -59,21 +59,21 @@ class SignUp extends React.Component {
 
     render() {
         return (
-            <section>
-                <form onSubmit={this.handleSignUp}>
-                    <label>
-                        Name:
-                        <input type='text' name='name' value={this.state.name} placeholder='Enter name' onChange={this.handleChange} />
-                    </label>
-                    <label>
-                        Email:
-                        <input type='email' name='email' value={this.state.email} placeholder='Enter email' onChange={this.handleChange} />
-                    </label>
-                    <label>
-                        Password:
-                        <input type='password' name='password' value={this.state.password} placeholder='Enter password' onChange={this.handleChange} />
-                    </label>
-                    <ButtonSubmit>SignUp</ButtonSubmit>
+            <section className='d-flex justify-content-center'>
+                <form className='col-2' onSubmit={this.handleSignUp}>
+                    <div className='form-group'>
+                        <label htmlFor='userInput'>User name</label>
+                        <input type='text' name='name' autoComplete='current-user' value={this.state.name} placeholder='Enter user name' onChange={this.handleChange} className='form-control' id='userInput' />
+                    </div>
+                    <div className='form-group'>
+                        <label htmlFor='inputEmail'>Email address</label>
+                        <input type='email' name='email' autoComplete='current-email' value={this.state.email} placeholder='Enter email' onChange={this.handleChange} className='form-control' id='inputEmail' />
+                    </div>
+                    <div className='form-group mb-3'>
+                        <label htmlFor='inputPassword'>Password</label>
+                        <input type='password' name='password' autoComplete='current-password' value={this.state.password} placeholder='Enter password' onChange={this.handleChange} className='form-control' id='inputPassword' />
+                    </div>
+                    <ButtonSubmit className='btn btn-primary w-100 btn-danger'>SignUp</ButtonSubmit>
                 </form>
             </section>
         )
