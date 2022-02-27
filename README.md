@@ -30,6 +30,10 @@ The main goal is to:
 - [x] Filter list
 - [x] Display list items number
 
+### React Router
+
+- [x] Secure paths without access
+
 ### Other
 
 - [x] Pagination
@@ -50,6 +54,7 @@ Project is: _in progress_
 - [ ] Change class component to function component
 - [ ] Change props drilling to react Context or Redux
 - [ ] Add hooks (useState etc.)
+- [ ] Redirect when user change number of threads or posts to last pagination page
 
 ## Todo
 
