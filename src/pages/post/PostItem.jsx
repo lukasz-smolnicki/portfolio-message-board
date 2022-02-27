@@ -19,7 +19,10 @@ const PostItem = (props) => {
                         <small className='text-muted text-nowrap'>3 days ago</small>
                     </div>
                     <div className='col-12 d-flex justify-content-between'>
-                        <small className='text-muted'>Created by: {user.name} in {post.date}</small>
+                        {post.editDate ?
+                            <small className='text-muted'>Edited by: {user.name} in {post.editDate}</small>
+                            :
+                            <small className='text-muted'>Created by: {user.name} in {post.date}</small>}
                         <div>
                             {(loggedUserId === user.id) && <PostItemButtons post={post} isDelete={isDelete} handleToggle={handleToggle} handlePostDelete={handlePostDelete} />}
                         </div>

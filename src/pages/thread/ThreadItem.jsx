@@ -20,7 +20,10 @@ const ThreadItem = (props) => {
                         <small className='text-muted text-nowrap'>3 days ago</small>
                     </div>
                     <div className='col-12 d-flex justify-content-between'>
-                        <small className='text-muted'>Created by: {user.name} in {thread.date}</small>
+                        {thread.editDate ?
+                            <small className='text-muted'>Edited by: {user.name} in {thread.editDate}</small>
+                            :
+                            <small className='text-muted'>Created by: {user.name} in {thread.date}</small>}
                         <div>
                             {(loggedUserId === user.id) && <ThreadItemButtons thread={thread} isDelete={isDelete} handleToggle={handleToggle} handleThreadDelete={handleThreadDelete} />}
                         </div>
