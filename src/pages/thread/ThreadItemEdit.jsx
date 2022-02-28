@@ -58,6 +58,7 @@ const ThreadItemEditButtons = (props) => {
     return (
         <>
             <div>
+                <span>Do you want to save changes?</span>
                 <Button className='btn btn-sm text-danger me-2' handleMethod={() => handleToggle('isEdit', false)}><FontAwesomeIcon icon={faTimes} /></Button>
                 <ButtonSubmit className='btn btn-sm text-success' ><FontAwesomeIcon icon={faCheck} /></ButtonSubmit>
             </div>
