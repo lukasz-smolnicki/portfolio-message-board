@@ -60,7 +60,7 @@ class SignUp extends React.Component {
     render() {
         return (
             <section className='d-flex justify-content-center'>
-                <form className='col-2' onSubmit={this.handleSignUp}>
+                <form onSubmit={this.handleSignUp}>
                     <div className='form-group'>
                         <label htmlFor='userInput'>User name</label>
                         <input type='text' name='name' autoComplete='current-user' value={this.state.name} placeholder='Enter user name' onChange={this.handleChange} className='form-control' id='userInput' />

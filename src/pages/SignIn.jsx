@@ -47,7 +47,7 @@ class SignIn extends React.Component {
     render() {
         return (
             <section className='d-flex justify-content-center'>
-                <form className='col-2' onSubmit={this.handleSignIn}>
+                <form onSubmit={this.handleSignIn}>
                     <div className='form-group'>
                         <label htmlFor='userInput'>Email address</label>
                         <input type='text' name='name' autoComplete='current-user' value={this.state.name} placeholder='Enter name' onChange={this.handleChange} className='form-control' id='userInput' />
